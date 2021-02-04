@@ -12,11 +12,13 @@ NBT-API (https://github.com/tr7zw/Item-NBT-API)
 ## 開発環境
 
 [Intellij Idea](https://www.jetbrains.com/ja-jp/idea/)  
-[Visual Studio Code](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)
+[Visual Studio Code](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)  
+[Google スプレッドシート](https://docs.google.com/spreadsheets/d/1A9bKWL-2iqBPj6XRF87jGsRwVFEXhxC8h1vhbTjNK1E/edit?usp=sharing)
 
 
 ## 開発者さんへ
-Wiki見てね https://github.com/Harineko0/MincraMagics/wiki
+
+プラグインの環境設定 https://github.com/Harineko0/MincraMagics/wiki/Information
 
 
 
