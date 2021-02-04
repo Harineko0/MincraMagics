@@ -87,6 +87,19 @@ public class SQLManager {
         }
     }
 
+    public void createTables() {
+        createTable("CREATE TABLE IF NOT EXISTS player (" +
+                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
+                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                "name varchar(20), " +
+                "uuid VARBINARY(36) NOT NULL UNIQUE," +
+                "mp_value FLOAT, " +
+                "cooltime_value FLOAT, " +
+                "cooltime_max FLOAT, " +
+                "cooltime_title TEXT" +
+                ")", "player");
+    }
+
     public void updateRecord(String query){
         try {
             Statement stmt = getConnection().createStatement();
