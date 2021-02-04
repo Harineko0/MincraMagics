@@ -15,6 +15,7 @@ import java.util.UUID;
 public class EntitySQL extends SQLManager {
 
     public void insertEntity(MincraEntity mincraEntity) {
+        /*
         ChatUtil.sendConsoleMessage(mincraEntity.getUuid() + mincraEntity.getMcr_id());
         String query = "SELECT EXISTS(SELECT * FROM entity WHERE uuid = '" + mincraEntity.getUuid() + "')";
 
@@ -25,18 +26,24 @@ public class EntitySQL extends SQLManager {
                     mincraEntity.getMcr_id() + "')";
             executeQuery(query);
         }
+
+         */
     }
 
     public void deleteEntity(UUID uuid) {
+        /*
         String query = "SELECT EXISTS(SELECT * FROM entity WHERE uuid = '" + uuid + "')";
 
         if (isExistRecord(query)) {
             query = "DELETE FROM entity WHERE uuid = '" + uuid + "'";
             executeQuery(query);
         }
+
+         */
     }
 
     public void loadMincraEntity() {
+        /*
         final String sql = "SELECT uuid, mcr_id FROM entity";
 
         try {
@@ -56,9 +63,12 @@ public class EntitySQL extends SQLManager {
             e.printStackTrace();
 
         }
+
+         */
     }
 
     public void saveMincraEntity() {
+        /*
         ChatUtil.sendConsoleMessage("全カスタムエンティティのデータをSQLに保存します...");
 
         String query = "truncate table entity";
@@ -67,5 +77,7 @@ public class EntitySQL extends SQLManager {
         for(Map.Entry<UUID, MincraEntity> entry : MincraMagics.getMobManager().getMincraEntityMap().entrySet()) {
             insertEntity(entry.getValue());
         }
+
+         */
     }
 }
