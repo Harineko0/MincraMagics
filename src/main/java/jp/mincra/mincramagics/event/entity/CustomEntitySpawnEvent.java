@@ -1,7 +1,7 @@
 package jp.mincra.mincramagics.event.entity;
 
 import jp.mincra.mincramagics.event.MincraListener;
-import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.entity.Entity;
 
 import java.util.EventListener;
 
@@ -9,8 +9,8 @@ public interface CustomEntitySpawnEvent extends EventListener, MincraListener {
 
     /**
      * カスタムエンティティがスポーンしたときに実行
-     * @param event イベント
+     * @param entity エンティティ
      * @param mcr_id スポーンさせるエンティティ名
      */
-    void onCustomEntitySpawn(EntitySpawnEvent event, String mcr_id);
+    void onCustomEntitySpawn(Entity entity, String mcr_id);
 }

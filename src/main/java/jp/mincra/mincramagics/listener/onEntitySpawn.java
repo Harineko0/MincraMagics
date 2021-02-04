@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.listener;
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.container.MincraEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,10 +32,15 @@ public class onEntitySpawn implements Listener {
 
                 if (hash < 0) {
 
-                    NBTEntity nbtZombie = new NBTEntity(entity);
-                    nbtZombie.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
+                    NBTEntity nbtEntity = new NBTEntity(entity);
+                    nbtEntity.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
 
-                    MincraMagics.getEventNotifier().runCustomEntitySpawn(event, mcr_id);
+                    MincraEntity mincraEntity = new MincraEntity();
+                    mincraEntity.setMcr_id(mcr_id);
+                    mincraEntity.setUuid(entity.getUniqueId());
+
+                    MincraMagics.getMobManager().addMincraEntity(mincraEntity);
+                    MincraMagics.getEventNotifier().runCustomEntitySpawn(event.getEntity(), mcr_id);
 
                     break;
                 }

@@ -1,6 +1,7 @@
 package jp.mincra.mincramagics.skill.rod;
 
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.container.MincraEntity;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.*;
@@ -48,10 +49,14 @@ public class BeastRod implements PlayerUseMagicRodEvent {
                     wolf.setOwner(player);
                     wolf.setBreed(false);
                     wolf.setCollarColor(dyeColorList.get(i));
-
                     mincraParticle.drawMagicCircle(wolf.getLocation(), 5, 1);
 
                     wolfList.add(wolf);
+
+                    MincraEntity mincraEntity = new MincraEntity();
+                    mincraEntity.setMcr_id(mcr_id);
+                    mincraEntity.setUuid(wolf.getUniqueId());
+                    MincraMagics.getMobManager().addMincraEntity(mincraEntity);
                 }
 
                 new BukkitRunnable() {

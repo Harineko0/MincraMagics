@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.entity.mob.hostile;
 import jp.mincra.mincramagics.event.entity.CustomEntitySpawnEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.Particle;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
@@ -12,11 +13,11 @@ import java.util.TimerTask;
 public class ExampleZombieMob implements CustomEntitySpawnEvent {
 
     @Override
-    public void onCustomEntitySpawn(EntitySpawnEvent event, String mcr_id) {
+    public void onCustomEntitySpawn(Entity entity, String mcr_id) {
 
         if (mcr_id.equals("example_zombie")) {
 
-            Zombie zombie = (Zombie) event.getEntity();
+            Zombie zombie = (Zombie) entity;
 
             MincraParticle mincraParticle = new MincraParticle();
             mincraParticle.setParticle(Particle.VILLAGER_HAPPY);

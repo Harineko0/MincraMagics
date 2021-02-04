@@ -5,7 +5,6 @@ import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntitySpawnEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +44,13 @@ public class EventNotifier {
 
     /**
      * カスタムエンティティがスポーンしたときに実行
-     * @param event イベント
+     * @param entity イベント
      * @param mcr_id スポーンさせるエンティティ名
      */
-    public void runCustomEntitySpawn(EntitySpawnEvent event, String mcr_id) {
+    public void runCustomEntitySpawn(Entity entity, String mcr_id) {
         if (this.customEntitySpawn != null) {
             for (CustomEntitySpawnEvent customEntitySpawnEvent : customEntitySpawn) {
-                customEntitySpawnEvent.onCustomEntitySpawn(event, mcr_id);
+                customEntitySpawnEvent.onCustomEntitySpawn(entity, mcr_id);
             }
         }
     }

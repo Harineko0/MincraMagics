@@ -44,6 +44,7 @@ public final class MincraMagics extends JavaPlugin {
         getSQLManager();
 //        sqlManager.getConnection();
         sqlManager.createTables();
+        sqlManager.getEntitySQL().loadMincraEntity();
         getUIManager();
         getJSONManager();
         getSkillManager();
@@ -62,6 +63,7 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
         getServer().getPluginManager().registerEvents(new onPlayerInteractEntity(), this);
         getServer().getPluginManager().registerEvents(new onEntitySpawn(), this);
+        getServer().getPluginManager().registerEvents(new onEntityDeath(), this);
         //独自リスナー
         getEventNotifier();
         //Skills
@@ -86,6 +88,7 @@ public final class MincraMagics extends JavaPlugin {
     public void onDisable() {
         //SQL全て保存
         sqlManager.getMincraPlayerSQL().saveMincraPlayer();
+        sqlManager.getEntitySQL().saveMincraEntity();
 
         instance = null;
         ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");

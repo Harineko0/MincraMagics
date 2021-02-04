@@ -1,6 +1,8 @@
 package jp.mincra.mincramagics.entity.mob;
 
+import jp.mincra.mincramagics.container.MincraEntity;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,6 +16,8 @@ public class MobManager {
     private Map<String, JSONObject> entityJsonMap;
     private Map<EntityType, List<String>> typeMCRIDMap;
     private Map<EntityType, Integer> typeSumMap;
+
+    private Map<UUID, MincraEntity> mincraEntityMap = new HashMap<>();
 
     public List<String> getFriendlyMobs() {
         return FRIENDLYMOBS;
@@ -80,5 +84,19 @@ public class MobManager {
             return entityJsonMap.get(mcr_id).getJSONObject("nbt");
         }
         return null;
+    }
+
+    public void addMincraEntity(MincraEntity mincraEntity) {
+        mincraEntityMap.put(mincraEntity.getUuid(), mincraEntity);
+    }
+
+    public void removeMincraEntity(UUID uuid) {
+        if (mincraEntityMap.containsKey(uuid)) {
+            mincraEntityMap.remove(uuid);
+        }
+    }
+
+    public Map<UUID, MincraEntity> getMincraEntityMap() {
+        return mincraEntityMap;
     }
 }
