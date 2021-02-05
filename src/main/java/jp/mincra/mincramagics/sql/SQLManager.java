@@ -70,19 +70,29 @@ public class SQLManager {
 
         return i == 0;
     }
-    
+
     public void createTable(String query, String tableName) {
         try {
 //            if (isExistTable(tableName)){
-                Statement stmt = getConnection().createStatement();
-                stmt.execute(query);
-                stmt.close();
-                ChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
+            Statement stmt = getConnection().createStatement();
+            stmt.execute(query);
+            stmt.close();
+            ChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
 //            } else {
 //                MincraChatUtil.sendConsoleMessage("テーブルは既に存在します。 テーブル名: " + tableName);
 //            }
         } catch (SQLException e) {
             ChatUtil.sendConsoleMessage("テーブルの作成に失敗しました。 \nテーブル名: " + tableName + "\nクエリ文: " + query);
+            e.printStackTrace();
+        }
+    }
+
+    public void executeQuery(String query){
+        try {
+            Statement stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -98,26 +108,6 @@ public class SQLManager {
                 "cooltime_max FLOAT, " +
                 "cooltime_title TEXT" +
                 ")", "player");
-    }
-
-    public void updateRecord(String query){
-        try {
-            Statement stmt = getConnection().createStatement();
-            stmt.executeUpdate(query);
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void insertRecord(String query) {
-            try {
-                Statement stmt = getConnection().createStatement();
-                stmt.executeUpdate(query);
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
     }
 
     //MincraPlayer型についての操作
