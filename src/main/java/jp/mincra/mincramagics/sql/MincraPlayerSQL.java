@@ -62,7 +62,7 @@ public class MincraPlayerSQL extends SQLManager {
             rs.close();
             return mincraPlayer;
         }catch (SQLException e){
-            ChatUtil.sendConsoleMessage("データを取得に失敗しました。");
+            ChatUtil.sendConsoleMessage("データの取得に失敗しました。");
             e.printStackTrace();
 
             return null;

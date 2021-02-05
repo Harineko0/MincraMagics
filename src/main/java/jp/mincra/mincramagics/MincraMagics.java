@@ -3,6 +3,7 @@ package jp.mincra.mincramagics;
 import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.command.MincraTabCompleter;
 import jp.mincra.mincramagics.entity.mob.MobManager;
+import jp.mincra.mincramagics.entity.mob.hostile.BeastRodMob;
 import jp.mincra.mincramagics.entity.mob.hostile.ExampleZombieMob;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.event.EventNotifier;
@@ -16,6 +17,7 @@ import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public final class MincraMagics extends JavaPlugin {
 
@@ -53,6 +55,14 @@ public final class MincraMagics extends JavaPlugin {
         getMobManager();
         mobManager.register(jsonManager.getAllJSONArray("./plugins/MincraMagics/data/mobs"));
 
+        //モブスキル
+        new BukkitRunnable() {
+            @Override
+            public void run(){
+                mobManager.loadAllCustomEntity();
+            }
+        }.runTaskLater(this, 60);
+
         //listener
         getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new onPlayerQuit(), this);
@@ -77,6 +87,7 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new DestroyRod());
         //Mobs
         eventNotifier.registerEvents(new ExampleZombieMob());
+        eventNotifier.registerEvents(new BeastRodMob());
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));

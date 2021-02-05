@@ -47,6 +47,7 @@ public class MincraCommands implements CommandExecutor {
 
             case "test":
                 if (caster instanceof Player) {
+                    /*
                     MincraParticle mincraParticle = new MincraParticle();
                     mincraParticle.setRadius(10);
                     mincraParticle.setParticle(Particle.SPELL_INSTANT);
@@ -73,6 +74,9 @@ public class MincraCommands implements CommandExecutor {
                             }
                         };
                     timer.scheduleAtFixedRate(task,0,50);
+
+                     */
+                    MincraMagics.getMobManager().loadAllCustomEntity();
 
 
                     return true;

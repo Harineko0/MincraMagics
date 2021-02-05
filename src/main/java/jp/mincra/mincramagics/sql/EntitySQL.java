@@ -2,82 +2,91 @@ package jp.mincra.mincramagics.sql;
 
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraEntity;
-import jp.mincra.mincramagics.container.MincraPlayer;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 import java.util.UUID;
 
 public class EntitySQL extends SQLManager {
 
-    public void insertEntity(MincraEntity mincraEntity) {
-        /*
-        ChatUtil.sendConsoleMessage(mincraEntity.getUuid() + mincraEntity.getMcr_id());
-        String query = "SELECT EXISTS(SELECT * FROM entity WHERE uuid = '" + mincraEntity.getUuid() + "')";
+    /**
+     * 全てのカスアムエンティティのUUIDとmcr_idをSQLに保存する
+     */
+    public void saveAllCustomEntity() {
+        ChatUtil.sendConsoleMessage("エンティティの保存を開始します...");
 
-        //insert
-        if (isExistRecord(query)){
-            query = "INSERT INTO entity (uuid, mcr_id) VALUES ('" +
-                    mincraEntity.getUuid() + "', '" +
-                    mincraEntity.getMcr_id() + "')";
-            executeQuery(query);
-        }
+        for (World world : Bukkit.getWorlds()) {
 
-         */
-    }
+            for (Entity entity : world.getEntities()) {
 
-    public void deleteEntity(UUID uuid) {
-        /*
-        String query = "SELECT EXISTS(SELECT * FROM entity WHERE uuid = '" + uuid + "')";
+                UUID uuid = entity.getUniqueId();
+                String mcr_id = null;
+                for (String tag : entity.getScoreboardTags()) {
+                    if (tag.contains("mcr_")) {
+                        mcr_id = tag;
+                    }
+                }
 
-        if (isExistRecord(query)) {
-            query = "DELETE FROM entity WHERE uuid = '" + uuid + "'";
-            executeQuery(query);
-        }
+                //mcr_idがあるとき=カスタムエンティティのとき
+                if (mcr_id != null) {
 
-         */
-    }
+                    StringBuffer buffer = new StringBuffer("INSERT INTO entity (mcr_id, uuid) VALUES ('");
+                    buffer.append(mcr_id);
+                    buffer.append("', '");
+                    buffer.append(uuid);
+                    buffer.append("')");
 
-    public void loadMincraEntity() {
-        /*
-        final String sql = "SELECT uuid, mcr_id FROM entity";
-
-        try {
-            Statement stmt = getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                ChatUtil.sendConsoleMessage("a");
-                ChatUtil.sendConsoleMessage(Bukkit.getEntity(UUID.fromString(rs.getString("uuid"))).isEmpty() + "");
-                MincraMagics.getEventNotifier().runCustomEntitySpawn(Bukkit.getEntity(UUID.fromString(rs.getString("uuid"))), rs.getString("mcr_id"));
+                    executeQuery(buffer.toString());
+                }
 
             }
-            stmt.close();
-            rs.close();
-
-        }catch (SQLException e){
-            ChatUtil.sendConsoleMessage("データを取得に失敗しました。");
-            e.printStackTrace();
-
         }
-
-         */
     }
 
-    public void saveMincraEntity() {
-        /*
-        ChatUtil.sendConsoleMessage("全カスタムエンティティのデータをSQLに保存します...");
 
-        String query = "truncate table entity";
-        executeQuery(query);
+    /**
+     * カスアムエンティティのデータを取得する。
+     */
+    private MincraEntity getMincraEntity(UUID uuid) {
 
-        for(Map.Entry<UUID, MincraEntity> entry : MincraMagics.getMobManager().getMincraEntityMap().entrySet()) {
-            insertEntity(entry.getValue());
+        StringBuilder exist = new StringBuilder("SELECT EXISTS(SELECT * FROM entity WHERE uuid = '");
+        exist.append(uuid.toString());
+        exist.append("')");
+
+        if (isExistRecord(exist.toString())) {
+
+            StringBuilder query = new StringBuilder("SELECT mcr_id, uuid FROM entity WHERE uuid ='");
+            query.append(uuid);
+            query.append("'");
+
+            try {
+                MincraEntity mincraEntity = new MincraEntity();
+
+                Statement stmt = getConnection().createStatement();
+                ResultSet rs = stmt.executeQuery(query.toString());
+                while (rs.next()) {
+                    mincraEntity.setUuid(uuid);
+                    mincraEntity.setMcr_id(rs.getString("mcr_id"));
+
+                    ChatUtil.sendConsoleMessage(rs.getString("mcr_id"));
+
+                }
+                stmt.close();
+                rs.close();
+                return mincraEntity;
+            } catch (SQLException e) {
+                ChatUtil.sendConsoleMessage("データの取得に失敗しました。");
+                e.printStackTrace();
+
+                return null;
+            }
         }
 
-         */
+        return null;
     }
 }

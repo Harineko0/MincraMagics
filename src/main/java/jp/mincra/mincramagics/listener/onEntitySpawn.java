@@ -35,6 +35,10 @@ public class onEntitySpawn implements Listener {
                     NBTEntity nbtEntity = new NBTEntity(entity);
                     nbtEntity.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
 
+                    StringBuffer buffer = new StringBuffer("mcr_");
+                    buffer.append(mcr_id);
+                    nbtEntity.getStringList("Tags").add(buffer.toString());
+
                     MincraEntity mincraEntity = new MincraEntity();
                     mincraEntity.setMcr_id(mcr_id);
                     mincraEntity.setUuid(entity.getUniqueId());

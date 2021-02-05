@@ -17,6 +17,7 @@ public class SQLManager {
             MincraMagics.getPropertyManager().getProperty("MySQL_password");
 
     private MincraPlayerSQL mincraPlayerSQL;
+    private EntitySQL entitySQL;
 
 
     public Connection getConnection(){
@@ -108,13 +109,32 @@ public class SQLManager {
                 "cooltime_max FLOAT, " +
                 "cooltime_title TEXT" +
                 ")", "player");
+
+        createTable("CREATE TABLE IF NOT EXISTS entity (" +
+                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                "mcr_id varchar(20), " +
+                "uuid VARBINARY(36) NOT NULL UNIQUE )", "entity");
     }
 
-    //MincraPlayer型についての操作
     public MincraPlayerSQL getMincraPlayerSQL() {
         if (mincraPlayerSQL == null) {
             mincraPlayerSQL = new MincraPlayerSQL();
         }
         return mincraPlayerSQL;
+    }
+
+    public EntitySQL getEntitySQL() {
+        if (entitySQL == null) {
+            entitySQL = new EntitySQL();
+        }
+        return entitySQL;
+    }
+
+
+    public void truncateTable(String tableName) {
+        StringBuilder query = new StringBuilder("TRUNCATE TABLE ");
+        query.append(tableName);
+
+        executeQuery(query.toString());
     }
 }

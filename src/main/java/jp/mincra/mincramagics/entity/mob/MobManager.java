@@ -1,7 +1,11 @@
 package jp.mincra.mincramagics.entity.mob;
 
+import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraEntity;
+import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.json.JSONArray;
@@ -9,7 +13,7 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-public class MobManager {
+public class MobManager extends SQLManager {
 
     final private List<String> FRIENDLYMOBS = new ArrayList<>(Arrays.asList("PLAYER","HORSE","OCELOT","WOLF","SHEEP","CHICKEN","COW","ITEMFRAME","VILLAGER"));
 
@@ -96,7 +100,23 @@ public class MobManager {
         }
     }
 
-    public Map<UUID, MincraEntity> getMincraEntityMap() {
-        return mincraEntityMap;
+    /**
+     * 全てのカスタムエンティティでCustomEntitySpawnを実行する
+     */
+    public void loadAllCustomEntity() {
+
+        for (World world : Bukkit.getWorlds()) {
+
+            for (Entity entity : world.getEntities()) {
+
+                for (String tag : entity.getScoreboardTags()) {
+
+                    if (tag != null && tag.contains("mcr_")) {
+                        MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, tag.substring(4));
+
+                    }
+                }
+            }
+        }
     }
 }

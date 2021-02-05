@@ -49,6 +49,8 @@ public class BeastRod implements PlayerUseMagicRodEvent {
                     wolf.setOwner(player);
                     wolf.setBreed(false);
                     wolf.setCollarColor(dyeColorList.get(i));
+                    wolf.addScoreboardTag("mcr_rod_beast");
+
                     mincraParticle.drawMagicCircle(wolf.getLocation(), 5, 1);
 
                     wolfList.add(wolf);
