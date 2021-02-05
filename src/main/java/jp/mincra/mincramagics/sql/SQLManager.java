@@ -87,6 +87,16 @@ public class SQLManager {
         }
     }
 
+    public void executeQuery(String query){
+        try {
+            Statement stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void createTables() {
         createTable("CREATE TABLE IF NOT EXISTS player (" +
                 //AUTO_INCREMENT 値が指定されなくても自動で入力される。
@@ -98,26 +108,6 @@ public class SQLManager {
                 "cooltime_max FLOAT, " +
                 "cooltime_title TEXT" +
                 ")", "player");
-    }
-
-    public void updateRecord(String query){
-        try {
-            Statement stmt = getConnection().createStatement();
-            stmt.executeUpdate(query);
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void insertRecord(String query) {
-        try {
-            Statement stmt = getConnection().createStatement();
-            stmt.executeUpdate(query);
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     //MincraPlayer型についての操作
