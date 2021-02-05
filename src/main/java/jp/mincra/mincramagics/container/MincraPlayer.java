@@ -7,8 +7,10 @@ public class MincraPlayer {
     private String playerName = "Unknown";
     private UUID playerUUID;
 
+    /*
     private float playerMP_value = 20;
     private float playerMP_max = 20;
+     */
 
     private float playerCooltime_value = 0;
     private float playerCooltime_max = 0;
@@ -29,6 +31,7 @@ public class MincraPlayer {
         return playerUUID;
     }
 
+    /*
     public void setPlayerMP_value(float playerMP_value){
         this.playerMP_value = playerMP_value;
     }
@@ -40,6 +43,7 @@ public class MincraPlayer {
         this.playerMP_max = playerMP_max;
     }
     public float getPlayerMP_max() {return playerMP_max;}
+     */
 
     public void setPlayerCooltime_value(float playerCooltime_value) {
         this.playerCooltime_value = playerCooltime_value;

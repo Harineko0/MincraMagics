@@ -16,7 +16,6 @@ public class MincraPlayerSQL extends SQLManager {
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
         String query = "UPDATE player set " +
                 "name = '" + mincraPlayer.getPlayerName() + "', " +
-                "mp_value = " + mincraPlayer.getPlayerMP_value() + ", " +
                 "cooltime_value = " + mincraPlayer.getPlayerCooltime_value() + ", " +
                 "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() + ", " +
                 "cooltime_title = '" + mincraPlayer.getCooltimeTitle() + "'" +
@@ -29,10 +28,9 @@ public class MincraPlayerSQL extends SQLManager {
 
         //insert
         if (isExistRecord(query)){
-            query = "INSERT INTO player (name, uuid, mp_value, cooltime_value, cooltime_max) VALUES ('" +
+            query = "INSERT INTO player (name, uuid, cooltime_value, cooltime_max) VALUES ('" +
                     mincraPlayer.getPlayerName() + "', '" +
                     mincraPlayer.getPlayerUUID() + "', " +
-                    mincraPlayer.getPlayerMP_value() + ", " +
                     mincraPlayer.getPlayerCooltime_value() + ", " +
                     mincraPlayer.getPlayerCooltime_max() + ")";
             executeQuery(query);
@@ -46,14 +44,13 @@ public class MincraPlayerSQL extends SQLManager {
         MincraPlayer mincraPlayer = new MincraPlayer();
         mincraPlayer.setPlayerUUID(uuid);
 
-        String sql = "SELECT name, uuid, mp_value, cooltime_value, cooltime_max, cooltime_title FROM player WHERE uuid = '"+ uuid +"'";
+        String sql = "SELECT name, uuid, cooltime_value, cooltime_max, cooltime_title FROM player WHERE uuid = '"+ uuid +"'";
 
         try {
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 mincraPlayer.setPlayerName(rs.getString("name"));
-                mincraPlayer.setPlayerMP_value(rs.getFloat("mp_value"));
                 mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
                 mincraPlayer.setCooltimeTitle(rs.getString("cooltime_title"));

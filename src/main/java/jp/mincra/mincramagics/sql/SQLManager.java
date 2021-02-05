@@ -104,7 +104,6 @@ public class SQLManager {
                 "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
                 "name varchar(20), " +
                 "uuid VARBINARY(36) NOT NULL UNIQUE," +
-                "mp_value FLOAT, " +
                 "cooltime_value FLOAT, " +
                 "cooltime_max FLOAT, " +
                 "cooltime_title TEXT" +

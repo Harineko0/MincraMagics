@@ -28,6 +28,7 @@ public class PlayerManager {
         MincraPlayerMap.remove(uuid);
     }
 
+    /*
     //MP
     public float getPlayerMP_value(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerMP_value();
@@ -52,6 +53,7 @@ public class PlayerManager {
         mincraPlayer.setPlayerCooltime_max(mp_max);
         MincraPlayerMap.put(uuid,mincraPlayer);
     }
+    */
 
     //Cooltime
     public float getPlayerCooltime_value(UUID uuid) {
