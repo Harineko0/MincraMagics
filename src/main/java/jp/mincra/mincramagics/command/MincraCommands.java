@@ -1,21 +1,26 @@
 package jp.mincra.mincramagics.command;
 
+import de.tr7zw.changeme.nbtapi.NBTContainer;
+import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -88,6 +93,9 @@ public class MincraCommands implements CommandExecutor {
             case "cooltime":
                 return cooltime(caster,args);
 
+            case "summon":
+                return summon(caster,args);
+
         }
         return false;
     }
@@ -143,6 +151,42 @@ public class MincraCommands implements CommandExecutor {
                 return true;
         }
         return false;
+    }
+
+    private boolean summon(Entity caster, @NotNull String[] args) {
+        if (caster instanceof Player) {
+
+            if (MincraMagics.getMobManager().isExistEntity(args[1])) {
+
+                JSONObject entityJSONObject = MincraMagics.getMobManager().getEntityJSONObject(args[1]);
+                String mcr_id = entityJSONObject.getString("mcr_id");
+
+                Location location = caster.getLocation();
+                Entity entity = caster.getWorld().spawnEntity(location, EntityType.valueOf(entityJSONObject.getString("id").toUpperCase()));
+
+                NBTEntity nbtEntity = new NBTEntity(entity);
+                nbtEntity.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
+
+                StringBuilder builder = new StringBuilder("mcr_");
+                builder.append(mcr_id);
+                nbtEntity.getStringList("Tags").add(builder.toString());
+
+                MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, mcr_id);
+
+                caster.sendMessage(ChatUtil.debug(args[1] + "を召喚しました。"));
+
+            } else {
+                StringBuilder builder = new StringBuilder(args[1]);
+                builder.append("は存在しません。");
+
+                caster.sendMessage(builder.toString());
+            }
+        } else {
+
+            ChatUtil.sendConsoleMessage("このコマンドはプレイヤーのみ実行可能です。");
+        }
+
+        return true;
     }
 
     private void sendErrorMessage(Entity caster, String[] args, int errorArg){

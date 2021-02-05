@@ -17,7 +17,7 @@ public class MincraTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args){
 
         if (args.length == 1) {
-            final List<String> arg1List = new ArrayList<>(Arrays.asList("give","reload","cooltime"));
+            final List<String> arg1List = new ArrayList<>(Arrays.asList("give","reload","cooltime","summon"));
 
             List<String> completions = new ArrayList<>();
 
@@ -36,6 +36,9 @@ public class MincraTabCompleter implements TabCompleter {
 
                 case "cooltime":
                     return cooltime(args);
+
+                case "summon":
+                    return summon(args);
 
             }
         }
@@ -75,6 +78,22 @@ public class MincraTabCompleter implements TabCompleter {
             switch (args[1]) {
             case "set":
                 return Arrays.asList("");
+        }
+
+        return null;
+    }
+
+    private List<String> summon(String[] args) {
+        List<String> completions = new ArrayList<>();
+
+        //summon
+        if (args.length == 2) {
+            for (String key : MincraMagics.getMobManager().getEntityJsonMap().keySet()) {
+                if (key.contains(args[1])) {
+                    completions.add(key);
+                }
+            }
+            return completions;
         }
 
         return null;

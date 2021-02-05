@@ -105,4 +105,17 @@ public class MobManager extends SQLManager {
             }
         }
     }
+
+
+    public boolean isExistEntity(String mcr_id) {
+        if (entityJsonMap.containsKey(mcr_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public JSONObject getEntityJSONObject(String mcr_id) {
+        return entityJsonMap.getOrDefault(mcr_id, null);
+    }
 }
