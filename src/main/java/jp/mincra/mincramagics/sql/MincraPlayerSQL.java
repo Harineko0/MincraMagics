@@ -21,7 +21,7 @@ public class MincraPlayerSQL extends SQLManager {
                 "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() + ", " +
                 "cooltime_title = '" + mincraPlayer.getCooltimeTitle() + "'" +
                 " WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
-        updateRecord(query);
+        executeQuery(query);
     }
 
     public void insertMincraPlayer(UUID uuid, MincraPlayer mincraPlayer){
@@ -35,7 +35,7 @@ public class MincraPlayerSQL extends SQLManager {
                     mincraPlayer.getPlayerMP_value() + ", " +
                     mincraPlayer.getPlayerCooltime_value() + ", " +
                     mincraPlayer.getPlayerCooltime_max() + ")";
-            insertRecord(query);
+            executeQuery(query);
         } else {
             ChatUtil.sendConsoleMessage("レコードが既にplayerテーブルに存在しています。 name=" +
                     mincraPlayer.getPlayerName() + " UUID: " + mincraPlayer.getPlayerUUID());

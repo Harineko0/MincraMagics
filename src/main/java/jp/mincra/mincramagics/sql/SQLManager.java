@@ -17,7 +17,6 @@ public class SQLManager {
             MincraMagics.getPropertyManager().getProperty("MySQL_password");
 
     private MincraPlayerSQL mincraPlayerSQL;
-    private EntitySQL entitySQL;
 
 
     public Connection getConnection(){
@@ -71,14 +70,14 @@ public class SQLManager {
 
         return i == 0;
     }
-    
+
     public void createTable(String query, String tableName) {
         try {
 //            if (isExistTable(tableName)){
-                Statement stmt = getConnection().createStatement();
-                stmt.execute(query);
-                stmt.close();
-                ChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
+            Statement stmt = getConnection().createStatement();
+            stmt.execute(query);
+            stmt.close();
+            ChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
 //            } else {
 //                MincraChatUtil.sendConsoleMessage("テーブルは既に存在します。 テーブル名: " + tableName);
 //            }
@@ -88,11 +87,17 @@ public class SQLManager {
         }
     }
 
-<<<<<<< Updated upstream
-    public void updateRecord(String query){
-=======
+    public void executeQuery(String query){
+        try {
+            Statement stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void createTables() {
-        //mincraPlayer
         createTable("CREATE TABLE IF NOT EXISTS player (" +
                 //AUTO_INCREMENT 値が指定されなくても自動で入力される。
                 "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
@@ -103,25 +108,6 @@ public class SQLManager {
                 "cooltime_max FLOAT, " +
                 "cooltime_title TEXT" +
                 ")", "player");
-
-        //entity
-        createTable("CREATE TABLE IF NOT EXISTS entity (" +
-                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
-                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
-                "uuid VARBINARY(36) NOT NULL UNIQUE," +
-                "mcr_id TEXT" +
-                ")", "entity");
-    }
-
-    public void executeQuery(String query){
->>>>>>> Stashed changes
-        try {
-            Statement stmt = getConnection().createStatement();
-            stmt.executeUpdate(query);
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     //MincraPlayer型についての操作
@@ -130,12 +116,5 @@ public class SQLManager {
             mincraPlayerSQL = new MincraPlayerSQL();
         }
         return mincraPlayerSQL;
-    }
-
-    public EntitySQL getEntitySQL() {
-        if (entitySQL == null) {
-            entitySQL = new EntitySQL();
-        }
-        return entitySQL;
     }
 }
