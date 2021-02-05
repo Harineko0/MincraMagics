@@ -70,14 +70,14 @@ public class SQLManager {
 
         return i == 0;
     }
-    
+
     public void createTable(String query, String tableName) {
         try {
 //            if (isExistTable(tableName)){
-                Statement stmt = getConnection().createStatement();
-                stmt.execute(query);
-                stmt.close();
-                ChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
+            Statement stmt = getConnection().createStatement();
+            stmt.execute(query);
+            stmt.close();
+            ChatUtil.sendConsoleMessage("テーブルの作成に成功しました。 テーブル名: " + tableName);
 //            } else {
 //                MincraChatUtil.sendConsoleMessage("テーブルは既に存在します。 テーブル名: " + tableName);
 //            }
@@ -111,13 +111,13 @@ public class SQLManager {
     }
 
     public void insertRecord(String query) {
-            try {
-                Statement stmt = getConnection().createStatement();
-                stmt.executeUpdate(query);
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            Statement stmt = getConnection().createStatement();
+            stmt.executeUpdate(query);
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //MincraPlayer型についての操作

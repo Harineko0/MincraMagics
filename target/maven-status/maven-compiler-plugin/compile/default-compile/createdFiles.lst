@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 jp\mincra\mincramagics\command\MincraCommands.class
 jp\mincra\mincramagics\listener\onPlayerInteract.class
 jp\mincra\mincramagics\entity\player\PlayerManager.class
@@ -60,3 +61,5 @@ jp\mincra\mincramagics\util\MincraParticle.class
 jp\mincra\mincramagics\listener\onPlayerQuit.class
 jp\mincra\mincramagics\listener\onPrepareItemCraft.class
 jp\mincra\mincramagics\container\MincraCustomShapedRecipe.class
+=======
+>>>>>>> feature/CustomMobs

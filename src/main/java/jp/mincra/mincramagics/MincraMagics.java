@@ -44,7 +44,6 @@ public final class MincraMagics extends JavaPlugin {
         getSQLManager();
 //        sqlManager.getConnection();
         sqlManager.createTables();
-        sqlManager.getEntitySQL().loadMincraEntity();
         getUIManager();
         getJSONManager();
         getSkillManager();
@@ -88,7 +87,6 @@ public final class MincraMagics extends JavaPlugin {
     public void onDisable() {
         //SQL全て保存
         sqlManager.getMincraPlayerSQL().saveMincraPlayer();
-        sqlManager.getEntitySQL().saveMincraEntity();
 
         instance = null;
         ChatUtil.sendConsoleMessage("プラグインが正常に終了しました。");
