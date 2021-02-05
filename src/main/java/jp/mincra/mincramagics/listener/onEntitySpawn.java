@@ -34,6 +34,8 @@ public class onEntitySpawn implements Listener {
                     NBTEntity nbtZombie = new NBTEntity(entity);
                     nbtZombie.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
 
+                    nbtZombie.getStringList("Tags").add(mcr_id);
+
                     MincraMagics.getEventNotifier().runCustomEntitySpawn(event, mcr_id);
 
                     break;

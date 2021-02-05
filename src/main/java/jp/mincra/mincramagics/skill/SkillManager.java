@@ -33,6 +33,8 @@ public class SkillManager {
     }
 
     public void registerSkill(String path, JSONArray jsonArray) {
+
+        ChatUtil.sendConsoleMessage("スキルの登録を開始します... from: " + path);
         JSONObject skillObject;
 
         for (int i=0, len=jsonArray.length(); i<len; i++) {

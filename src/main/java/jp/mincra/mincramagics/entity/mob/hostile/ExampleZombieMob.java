@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.entity.mob.hostile;
 import jp.mincra.mincramagics.event.entity.CustomEntitySpawnEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.Particle;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.entity.EntitySpawnEvent;
 

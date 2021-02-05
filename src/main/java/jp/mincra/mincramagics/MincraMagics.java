@@ -43,7 +43,16 @@ public final class MincraMagics extends JavaPlugin {
         playerManager.setOnlinePlayerList();
         getSQLManager();
 //        sqlManager.getConnection();
-        sqlManager.createTables();
+        sqlManager.createTable("CREATE TABLE IF NOT EXISTS player (" +
+                //AUTO_INCREMENT 値が指定されなくても自動で入力される。
+                "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
+                "name varchar(20), " +
+                "uuid VARBINARY(36) NOT NULL UNIQUE," +
+                "mp_value FLOAT, " +
+                "cooltime_value FLOAT, " +
+                "cooltime_max FLOAT, " +
+                "cooltime_title TEXT" +
+                ")", "player");
         getUIManager();
         getJSONManager();
         getSkillManager();
@@ -72,8 +81,6 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new JumpRod());
         eventNotifier.registerEvents(new WaterRod());
         eventNotifier.registerEvents(new BarrierRod());
-        eventNotifier.registerEvents(new BeastRod());
-        eventNotifier.registerEvents(new DestroyRod());
         //Mobs
         eventNotifier.registerEvents(new ExampleZombieMob());
 

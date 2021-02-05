@@ -9,12 +9,10 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\ut
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\ExpUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\BossBarUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\entity\mob\MobManager.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\DestroyRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\JumpRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\event\entity\CustomEntitySpawnEvent.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\entity\player\PlayerManager.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\TemplateRod.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\entity\mob\friendly\BeastWolfMob.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\ExpRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerInteract.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\listener\onPlayerJoin.java
@@ -24,7 +22,6 @@ C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\ev
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\util\ChatUtil.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\MoveRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\event\player\PlayerUseMagicRodEvent.java
-C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\BeastRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\skill\rod\CureRod.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\container\MincraCustomShapedRecipe.java
 C:\Users\hatin\IdeaProjects\MincraMagics\src\main\java\jp\mincra\mincramagics\MincraMagics.java
