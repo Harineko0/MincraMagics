@@ -28,33 +28,6 @@ public class PlayerManager {
         MincraPlayerMap.remove(uuid);
     }
 
-    /*
-    //MP
-    public float getPlayerMP_value(UUID uuid) {
-        return MincraPlayerMap.get(uuid).getPlayerMP_value();
-    }
-    public void addPlayerMP_value(UUID uuid, float mp_value) {
-        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
-        mp_value = mp_value + mincraPlayer.getPlayerMP_value();
-        mincraPlayer.setPlayerMP_value(mp_value);
-        MincraPlayerMap.put(uuid,mincraPlayer);
-    }
-    public void setPlayerMP_value(UUID uuid, float mp_value) {
-        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
-        mincraPlayer.setPlayerCooltime_max(mp_value);
-        MincraPlayerMap.put(uuid,mincraPlayer);
-    }
-
-    public float getPlayerMP_max(UUID uuid) {
-        return MincraPlayerMap.get(uuid).getPlayerMP_max();
-    }
-    public void setPlayerMP_max(UUID uuid, float mp_max) {
-        MincraPlayer mincraPlayer = MincraPlayerMap.get(uuid);
-        mincraPlayer.setPlayerCooltime_max(mp_max);
-        MincraPlayerMap.put(uuid,mincraPlayer);
-    }
-    */
-
     //Cooltime
     public float getPlayerCooltime_value(UUID uuid) {
         return MincraPlayerMap.get(uuid).getPlayerCooltime_value();
