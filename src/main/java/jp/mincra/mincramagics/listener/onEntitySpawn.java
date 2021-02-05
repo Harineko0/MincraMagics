@@ -3,7 +3,6 @@ package jp.mincra.mincramagics.listener;
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.container.MincraEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,11 +38,6 @@ public class onEntitySpawn implements Listener {
                     buffer.append(mcr_id);
                     nbtEntity.getStringList("Tags").add(buffer.toString());
 
-                    MincraEntity mincraEntity = new MincraEntity();
-                    mincraEntity.setMcr_id(mcr_id);
-                    mincraEntity.setUuid(entity.getUniqueId());
-
-                    MincraMagics.getMobManager().addMincraEntity(mincraEntity);
                     MincraMagics.getEventNotifier().runCustomEntitySpawn(event.getEntity(), mcr_id);
 
                     break;

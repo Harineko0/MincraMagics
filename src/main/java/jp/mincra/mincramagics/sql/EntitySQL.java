@@ -1,6 +1,5 @@
 package jp.mincra.mincramagics.sql;
 
-import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraEntity;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Bukkit;

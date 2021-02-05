@@ -1,5 +1,6 @@
 package jp.mincra.mincramagics.skill.rod;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
@@ -8,9 +9,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -96,8 +99,8 @@ public class DestroyRod implements PlayerUseMagicRodEvent, PlayerUseMagicRodToEn
             }
 
             ItemStack itemStack = player.getInventory().getItemInMainHand();
-            itemStack.setDurability((short) (itemStack.getDurability() + 20));
 
+            itemStack.setDurability((short) (itemStack.getDurability() + 20));
 
         }
 
