@@ -23,14 +23,13 @@ public class MobManager extends SQLManager {
     public List<String> getFriendlyMobs() {
         return FRIENDLYMOBS;
     }
+
     public Map<String, JSONObject> getEntityJsonMap() {
         return entityJsonMap;
     }
-
     public List<String> getTypeMCRIDList(EntityType entityType) {
         return typeMCRIDMap.get(entityType);
     }
-
     public Integer getTypeSum(EntityType entityType) {
         return typeSumMap.get(entityType);
     }
