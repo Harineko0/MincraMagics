@@ -28,58 +28,43 @@ public class MincraCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        switch (command.toString()) {
 
-            case "mcr":
+        if (sender instanceof Entity) {
+            Entity caster = (Entity) sender;
 
-                if (sender instanceof Entity) {
-                    Entity caster = (Entity) sender;
-
-                    if (args.length < 1) {
-                        //argsが空っぽの時の処理
-                        ChatUtil.sendMessage(ChatUtil.debug("引数が空です。"), caster);
-                        return false;
-                    }
-
-                    switch (args[0]) {
-                        case "test":
-                            if (caster instanceof Player) {
-                                return true;
-                            }
-
-                        case "reload":
-                            MincraMagics.reload();
-                            ChatUtil.sendMessage(ChatUtil.debug("プラグインをリロードします..."), caster);
-                            return true;
-
-                        case "give":
-                            return give(caster, args);
-
-                        case "cooltime":
-                            return cooltime(caster, args);
-
-                        case "summon":
-                            return summon(caster, args);
-
-                    }
-                }
+            if (args.length < 1) {
+                //argsが空っぽの時の処理
+                ChatUtil.sendMessage(ChatUtil.debug("引数が空です。"), caster);
                 return false;
-
-            case "skill":
-
-                if (sender instanceof Player) {
-                    Player caster = (Player) sender;
-
-                    if (args.length == 0) {
-                        return skill(caster);
-                    }
-                }
             }
 
-            return false;
+            switch (args[0]) {
+                case "test":
+                    if (caster instanceof Player) {
+                        MincraMagics.getPlayerManager().setMaterial(caster.getUniqueId(), Integer.valueOf(args[1]), args[2]);
+
+                        return true;
+                    }
+
+                case "reload":
+                        MincraMagics.reload();
+                        ChatUtil.sendMessage(ChatUtil.debug("プラグインをリロードします..."), caster);
+                        return true;
+
+                case "give":
+                    return give(caster, args);
+
+                case "cooltime":
+                    return cooltime(caster, args);
+
+                case "summon":
+                    return summon(caster, args);
+
+            }
+        }
+        return false;
     }
 
-    // /mcr1
     private boolean give(Entity caster, @NotNull String[] args) {
 
         Player player = Bukkit.getPlayer(args[1]);
@@ -165,17 +150,6 @@ public class MincraCommands implements CommandExecutor {
             ChatUtil.sendConsoleMessage("/summonはプレイヤーのみ実行可能です。");
         }
 
-        return true;
-    }
-
-    // /skill
-    private boolean skill(Player sender) {
-        if (sender instanceof Player) {
-            sender.openInventory(MincraMagics.getPlayerManager().getMaterialInventory(sender.getUniqueId()));
-
-        } else {
-            ChatUtil.sendConsoleMessage("/skillはプレイヤーのみ実行可能です。");
-        }
         return true;
     }
 

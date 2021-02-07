@@ -55,6 +55,7 @@ public class ItemManager {
 
         for (int i = 0, len = itemArray.length(); i < len; i++) {
             itemObject = itemArray.getJSONObject(i);
+            String type = null;
 
             //id-------------------------------------↓
             if (itemObject.has("id")) {
@@ -97,6 +98,12 @@ public class ItemManager {
             if (itemObject.has("nbt") && itemObject.get("nbt") instanceof JSONObject) {
 
                 nbtItem.mergeCompound(new NBTContainer(itemObject.getJSONObject("nbt").toString()));
+
+                JSONObject nbtObject = itemObject.getJSONObject("nbt");
+
+                if (nbtObject.has("MincraMagics") && nbtObject.getJSONObject("MincraMagics").has("type")) {
+                    type = nbtObject.getJSONObject("MincraMagics").getString("type");
+                }
             }
 
             //-mcr_id------------------------------↓↓↓
@@ -108,8 +115,9 @@ public class ItemManager {
 
             item = nbtItem.getItem();
 
-            //スキルアイテムのLore
-            if (MincraMagics.getSkillManager().getSkillMap().containsKey(mcr_id)) {
+            //杖のLore
+            if (MincraMagics.getSkillManager().getSkillMap().containsKey(mcr_id) && type != null) {
+
                 MincraSkill mincraSkill = MincraMagics.getSkillManager().getSkillMap().get(mcr_id);
                 ItemMeta itemMeta = item.getItemMeta();
 
@@ -128,14 +136,32 @@ public class ItemManager {
                     spaceBreak.append(" ");
                 }
 
-                List<String> loreList = Arrays.asList(
-                        ChatColor.AQUA + mincraSkill.getLore(),
-                        ChatColor.AQUA + "クールタイム:" + spaceCooltime.toString() + ChatColor.AQUA + mincraSkill.getCooltime(),
-                        ChatColor.AQUA + "MP消費:" + spaceExp.toString() + ChatColor.AQUA + mincraSkill.getExp_lv(),
-                        ChatColor.DARK_RED + "崩壊確率:" + spaceBreak.toString() + ChatColor.DARK_RED + mincraSkill.getBreak_rate()
-                );
-                itemMeta.setLore(loreList);
-                item.setItemMeta(itemMeta);
+                List<String> loreList;
+
+                switch (type) {
+
+                    case "rod":
+                        loreList = Arrays.asList(
+                                ChatColor.AQUA + mincraSkill.getLore(),
+                                ChatColor.AQUA + "クールタイム:" + spaceCooltime.toString() + ChatColor.AQUA + mincraSkill.getCooltime(),
+                                ChatColor.AQUA + "MP消費:" + spaceExp.toString() + ChatColor.AQUA + mincraSkill.getExp_lv(),
+                                ChatColor.DARK_RED + "崩壊確率:" + spaceBreak.toString() + ChatColor.DARK_RED + mincraSkill.getBreak_rate()
+                        );
+                        itemMeta.setLore(loreList);
+                        item.setItemMeta(itemMeta);
+                        break;
+
+                    case "material":
+                        loreList = Arrays.asList(
+                                ChatColor.GREEN + mincraSkill.getLore(),
+                                ChatColor.GREEN + "クールタイム:" + spaceCooltime.toString() + ChatColor.GREEN + mincraSkill.getCooltime(),
+                                ChatColor.GREEN + "MP消費:" + spaceExp.toString() + ChatColor.GREEN + mincraSkill.getExp_lv()
+                        );
+                        itemMeta.setLore(loreList);
+                        item.setItemMeta(itemMeta);
+                        break;
+
+                }
             }
 
             itemStackMap.put(mcr_id, item);

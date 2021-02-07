@@ -82,7 +82,7 @@ public class PlayerManager {
 
     public Inventory getMaterialInventory(UUID uuid) {
 
-        StringBuilder builder = new StringBuilder(ChatUtil.setColorCodes("&#3fd4fe&f[スキルスロット] &f残りスキルポイント: "));
+        StringBuilder builder = new StringBuilder(ChatUtil.setColorCodes("&#2d9ebd&f&lマテリアル &8残りスキルポイント: "));
         builder.append(getMaterialPoint(uuid));
         Inventory inventory = Bukkit.createInventory(null, 9, builder.toString());
 

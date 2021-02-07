@@ -2,6 +2,7 @@ package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.MincraCommands;
 import jp.mincra.mincramagics.command.MincraTabCompleter;
+import jp.mincra.mincramagics.command.SkillCommands;
 import jp.mincra.mincramagics.entity.mob.MobManager;
 import jp.mincra.mincramagics.entity.mob.hostile.BeastRodMob;
 import jp.mincra.mincramagics.entity.mob.hostile.ExampleZombieMob;
@@ -92,6 +93,7 @@ public final class MincraMagics extends JavaPlugin {
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));
         getCommand("mcr").setTabCompleter(new MincraTabCompleter());
+        getCommand("skill").setExecutor(new SkillCommands());
     }
 
     @Override
