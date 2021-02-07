@@ -9,3 +9,6 @@ commands:
   mcr:
     description: MincraMagicsのコマンド。
     usage: /<command>
+  skill:
+    description: マテリアルに関するコマンド。
+    usage: /<command>

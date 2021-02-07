@@ -14,12 +14,35 @@ public class MincraPlayerSQL extends SQLManager {
 
     //MincraPlayer型についての操作
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
-        String query = "UPDATE player set " +
-                "name = '" + mincraPlayer.getPlayerName() + "', " +
-                "cooltime_value = " + mincraPlayer.getPlayerCooltime_value() + ", " +
-                "cooltime_max = " + mincraPlayer.getPlayerCooltime_max() + ", " +
-                "cooltime_title = '" + mincraPlayer.getCooltimeTitle() + "'" +
-                " WHERE uuid = '" + mincraPlayer.getPlayerUUID() + "'";
+
+        StringBuilder builder = new StringBuilder("UPDATE player set name = '");
+        builder.append(mincraPlayer.getPlayerName());
+        builder.append("', cooltime_value = ");
+        builder.append(mincraPlayer.getPlayerCooltime_value());
+        builder.append(", cooltime_max = ");
+        builder.append(mincraPlayer.getPlayerCooltime_max());
+        builder.append(", cooltime_title = '");
+        builder.append(mincraPlayer.getCooltimeTitle());
+        builder.append("', ");
+        //マテリアル
+        StringBuilder material = new StringBuilder();
+        for (int i=0; i<9; i++) {
+            material.append("material0");
+            material.append(i + 1);
+            material.append(" = '");
+            material.append(mincraPlayer.getMaterial(i));
+            material.append("', ");
+        }
+
+        builder.append(material.toString());
+        builder.append("materialPoint = ");
+        builder.append(mincraPlayer.getMaterialPoint());
+        builder.append(" WHERE uuid = '");
+        builder.append(mincraPlayer.getPlayerUUID());
+        builder.append("'");
+
+        String query = builder.toString();
+
         executeQuery(query);
     }
 
@@ -44,7 +67,7 @@ public class MincraPlayerSQL extends SQLManager {
         MincraPlayer mincraPlayer = new MincraPlayer();
         mincraPlayer.setPlayerUUID(uuid);
 
-        String sql = "SELECT name, uuid, cooltime_value, cooltime_max, cooltime_title FROM player WHERE uuid = '"+ uuid +"'";
+        String sql = "SELECT * FROM player WHERE uuid = '"+ uuid +"'";
 
         try {
             Statement stmt = getConnection().createStatement();
@@ -54,6 +77,12 @@ public class MincraPlayerSQL extends SQLManager {
                 mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
                 mincraPlayer.setCooltimeTitle(rs.getString("cooltime_title"));
+
+                for (int i = 0; i<9; i++) {
+                    StringBuilder builder = new StringBuilder("material0");
+                    mincraPlayer.setMaterial(i, rs.getString(builder.append(i+1).toString()));
+                }
+                mincraPlayer.setMaterialPoint(rs.getInt("materialPoint"));
             }
             stmt.close();
             rs.close();

@@ -102,11 +102,21 @@ public class SQLManager {
         createTable("CREATE TABLE IF NOT EXISTS player (" +
                 //AUTO_INCREMENT 値が指定されなくても自動で入力される。
                 "id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, " +
-                "name varchar(20), " +
+                "name VARCHAR(20), " +
                 "uuid VARBINARY(36) NOT NULL UNIQUE," +
                 "cooltime_value FLOAT, " +
                 "cooltime_max FLOAT, " +
-                "cooltime_title TEXT" +
+                "cooltime_title VARCHAR(20), " +
+                "material01 VARCHAR(20), " +
+                "material02 VARCHAR(20), " +
+                "material03 VARCHAR(20), " +
+                "material04 VARCHAR(20), " +
+                "material05 VARCHAR(20), " +
+                "material06 VARCHAR(20), " +
+                "material07 VARCHAR(20), " +
+                "material08 VARCHAR(20), " +
+                "material09 VARCHAR(20), " +
+                "materialPoint SMALLINT" +
                 ")", "player");
 
         createTable("CREATE TABLE IF NOT EXISTS entity (" +

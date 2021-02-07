@@ -5,11 +5,9 @@ import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
-import jp.mincra.mincramagics.util.MincraParticle;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,12 +16,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MincraCommands implements CommandExecutor {
 
@@ -34,73 +28,58 @@ public class MincraCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Entity caster = null;
+        switch (command.toString()) {
 
-        if (sender instanceof Entity) caster = (Entity)sender;
+            case "mcr":
 
-        if (args.length < 1){
-            //argsが空っぽの時の処理
-            ChatUtil.sendMessage(ChatUtil.debug("引数が空です。"),caster);
-            return false;
-        }
+                if (sender instanceof Entity) {
+                    Entity caster = (Entity) sender;
 
-        switch (args[0]) {
-            case "reload":
-                MincraMagics.reload();
-                ChatUtil.sendMessage(ChatUtil.debug("プラグインをリロードします..."),caster);
-                return true;
+                    if (args.length < 1) {
+                        //argsが空っぽの時の処理
+                        ChatUtil.sendMessage(ChatUtil.debug("引数が空です。"), caster);
+                        return false;
+                    }
 
-            case "test":
-                if (caster instanceof Player) {
-                    /*
-                    MincraParticle mincraParticle = new MincraParticle();
-                    mincraParticle.setRadius(10);
-                    mincraParticle.setParticle(Particle.SPELL_INSTANT);
-                    mincraParticle.setRolling(Double.parseDouble(args[4]), Double.parseDouble(args[5]), Double.parseDouble(args[6]));
-                    mincraParticle.setRotationAxis(new Vector(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
-                    mincraParticle.drawMagicCircle(caster.getLocation(),5, 1,1,0,0);
-
-
-                    Timer timer = new Timer(); // 今回追加する処理
-                    Entity finalCaster = caster;
-                    final double[] i = {0};
-
-                    TimerTask task = new TimerTask() {
-                            public void run() {
-                                i[0] += Double.parseDouble(args[7]);
-
-                                mincraParticle.setAngle(i[0]);
-                                mincraParticle.drawMagicCircle(finalCaster.getLocation(),5, 1,1,0,0);
-
-                                if (i[0] > 20) {
-                                    timer.cancel();
-                                }
-
+                    switch (args[0]) {
+                        case "test":
+                            if (caster instanceof Player) {
+                                return true;
                             }
-                        };
-                    timer.scheduleAtFixedRate(task,0,50);
 
-                     */
-                    MincraMagics.getMobManager().loadAllCustomEntity();
+                        case "reload":
+                            MincraMagics.reload();
+                            ChatUtil.sendMessage(ChatUtil.debug("プラグインをリロードします..."), caster);
+                            return true;
 
+                        case "give":
+                            return give(caster, args);
 
-                    return true;
+                        case "cooltime":
+                            return cooltime(caster, args);
+
+                        case "summon":
+                            return summon(caster, args);
+
+                    }
                 }
+                return false;
 
-            case "give":
-                return give(caster,args);
+            case "skill":
 
-            case "cooltime":
-                return cooltime(caster,args);
+                if (sender instanceof Player) {
+                    Player caster = (Player) sender;
 
-            case "summon":
-                return summon(caster,args);
+                    if (args.length == 0) {
+                        return skill(caster);
+                    }
+                }
+            }
 
-        }
-        return false;
+            return false;
     }
 
-
+    // /mcr1
     private boolean give(Entity caster, @NotNull String[] args) {
 
         Player player = Bukkit.getPlayer(args[1]);
@@ -183,9 +162,20 @@ public class MincraCommands implements CommandExecutor {
             }
         } else {
 
-            ChatUtil.sendConsoleMessage("このコマンドはプレイヤーのみ実行可能です。");
+            ChatUtil.sendConsoleMessage("/summonはプレイヤーのみ実行可能です。");
         }
 
+        return true;
+    }
+
+    // /skill
+    private boolean skill(Player sender) {
+        if (sender instanceof Player) {
+            sender.openInventory(MincraMagics.getPlayerManager().getMaterialInventory(sender.getUniqueId()));
+
+        } else {
+            ChatUtil.sendConsoleMessage("/skillはプレイヤーのみ実行可能です。");
+        }
         return true;
     }
 

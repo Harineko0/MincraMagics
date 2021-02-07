@@ -11,6 +11,9 @@ public class MincraPlayer {
     private float playerCooltime_max = 0;
     private String cooltimeTitle;
 
+    private String[] materialList = new String[9];
+    private int materialPoint = 100;
+
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
@@ -41,4 +44,22 @@ public class MincraPlayer {
     public void setCooltimeTitle(String cooltimeTitle){this.cooltimeTitle = cooltimeTitle;}
     public String getCooltimeTitle(){return cooltimeTitle;}
 
+    public void setMaterial(int slot, String mcr_id) {
+        if (slot < 10 && mcr_id.contains("material_")) {
+            materialList[slot] = mcr_id;
+        }
+    }
+    public String getMaterial(int slot) {
+        if (slot < 10) {
+            return materialList[slot];
+        }
+        return null;
+    }
+
+    public void setMaterialPoint(int materialPoint) {
+        this.materialPoint = materialPoint;
+    }
+    public int getMaterialPoint() {
+        return materialPoint;
+    }
 }
