@@ -1,8 +1,17 @@
 package jp.mincra.mincramagics.sql;
 
+import de.tr7zw.changeme.nbtapi.NBTContainer;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.container.MincraPlayer;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -101,6 +110,72 @@ public class MincraPlayerSQL extends SQLManager {
         for(Map.Entry<UUID, MincraPlayer> entry : MincraMagics.getPlayerManager().getMincraPlayerMap().entrySet()) {
             updateMincraPlayer(entry.getValue());
         }
+    }
+
+    //inventory
+    private String inventoryToString(Inventory inventory, String title) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        ItemStack itemStack;
+        NBTItem nbtItem;
+
+        for (int i=0, len=inventory.getSize(); i<len; i++) {
+            JSONObject inventoryObject = new JSONObject();
+            itemStack = inventory.getItem(i);
+
+            if (itemStack != null) {
+                nbtItem = new NBTItem(itemStack);
+
+                inventoryObject.put("count", itemStack.getAmount());
+                inventoryObject.put("slot", i);
+                inventoryObject.put("id", itemStack.getType());
+
+                if (nbtItem.hasNBTData()) {
+                    inventoryObject.put("tag", nbtItem.toString());
+                }
+
+                jsonArray.put(inventoryObject);
+
+            }
+        }
+
+        jsonObject.put("size", inventory.getSize());
+        jsonObject.put("title", title);
+        jsonObject.put("inventory", jsonArray);
+
+        return jsonObject.toString();
+    }
+
+    private Inventory stringToInventory(String string) {
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = new JSONObject(string);
+        }catch (JSONException e){
+            ChatUtil.sendConsoleMessage("エラー: "+e.toString());
+        }
+
+        Inventory inventory = Bukkit.createInventory(null, jsonObject.getInt("size"), jsonObject.getString("title"));
+
+        JSONArray jsonArray = jsonObject.getJSONArray("inventory");
+
+        for (int i=0, len=jsonArray.length(); i<len; i++) {
+            JSONObject inventoryObject = jsonArray.getJSONObject(i);
+
+            ItemStack item = null;
+            item.setType(Material.valueOf(inventoryObject.getString("id")));
+            item.setAmount(inventoryObject.getInt("count"));
+
+            NBTItem nbt = new NBTItem(item);
+            nbt.mergeCompound(new NBTContainer(inventoryObject.getJSONObject("tag").toString()));
+
+            item = nbt.getItem();
+
+            inventory.setItem(i, item);
+
+        }
+
+        return inventory;
     }
 }
 

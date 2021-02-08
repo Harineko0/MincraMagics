@@ -107,15 +107,7 @@ public class SQLManager {
                 "cooltime_value FLOAT, " +
                 "cooltime_max FLOAT, " +
                 "cooltime_title VARCHAR(20), " +
-                "material01 VARCHAR(20), " +
-                "material02 VARCHAR(20), " +
-                "material03 VARCHAR(20), " +
-                "material04 VARCHAR(20), " +
-                "material05 VARCHAR(20), " +
-                "material06 VARCHAR(20), " +
-                "material07 VARCHAR(20), " +
-                "material08 VARCHAR(20), " +
-                "material09 VARCHAR(20), " +
+                "materialInventory VARCHAR(16384), " +
                 "materialPoint SMALLINT" +
                 ")", "player");
 
