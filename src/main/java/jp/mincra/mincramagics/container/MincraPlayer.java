@@ -1,5 +1,9 @@
 package jp.mincra.mincramagics.container;
 
+import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
+
 import java.util.UUID;
 
 public class MincraPlayer {
@@ -11,9 +15,8 @@ public class MincraPlayer {
     private float playerCooltime_max = 0;
     private String cooltimeTitle;
 
-    private String[] materialList = new String[9];
     private int materialPoint = 100;
-
+    private Inventory materialInventory = Bukkit.createInventory(null, 9, new StringBuilder(ChatUtil.setColorCodes("&#2d9ebd&f&lマテリアル &8残りスキルポイント: ")).append(materialPoint).toString());
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
@@ -44,16 +47,12 @@ public class MincraPlayer {
     public void setCooltimeTitle(String cooltimeTitle){this.cooltimeTitle = cooltimeTitle;}
     public String getCooltimeTitle(){return cooltimeTitle;}
 
-    public void setMaterial(int slot, String mcr_id) {
-        if (slot < 10 && mcr_id.contains("material_")) {
-            materialList[slot] = mcr_id;
-        }
+
+    public Inventory getMaterialInventory() {
+        return materialInventory;
     }
-    public String getMaterial(int slot) {
-        if (slot < 10) {
-            return materialList[slot];
-        }
-        return null;
+    public void setMaterialInventory(Inventory materialInventory) {
+        this.materialInventory = materialInventory;
     }
 
     public void setMaterialPoint(int materialPoint) {

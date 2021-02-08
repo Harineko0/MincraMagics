@@ -65,12 +65,11 @@ public class PlayerManager {
         return MincraPlayerMap.get(uuid).getCooltimeTitle();
     }
 
-    //マテリアル
-    public void setMaterial(UUID uuid, int slot, String mcr_id) {
-        MincraPlayerMap.get(uuid).setMaterial(slot, mcr_id);
+    public void setMaterialInventory(UUID uuid, Inventory inventory) {
+        MincraPlayerMap.get(uuid).setMaterialInventory(inventory);
     }
-    public String getMaterial(UUID uuid, int slot) {
-        return MincraPlayerMap.get(uuid).getMaterial(slot);
+    public Inventory getMaterialInventory(UUID uuid) {
+        return MincraPlayerMap.get(uuid).getMaterialInventory();
     }
 
     public void setMaterialPoint(UUID uuid, Integer point) {
@@ -78,22 +77,6 @@ public class PlayerManager {
     }
     public Integer getMaterialPoint(UUID uuid) {
         return MincraPlayerMap.get(uuid).getMaterialPoint();
-    }
-
-    public Inventory getMaterialInventory(UUID uuid) {
-
-        StringBuilder builder = new StringBuilder(ChatUtil.setColorCodes("&#2d9ebd&f&lマテリアル &8残りスキルポイント: "));
-        builder.append(getMaterialPoint(uuid));
-        Inventory inventory = Bukkit.createInventory(null, 9, builder.toString());
-
-        for (int i=0; i<9; i++) {
-            String mcr_id = getMaterial(uuid, i);
-            if (mcr_id != null) {
-                inventory.addItem(MincraMagics.getItemManager().getItem(mcr_id));
-            }
-        }
-
-        return inventory;
     }
 
 

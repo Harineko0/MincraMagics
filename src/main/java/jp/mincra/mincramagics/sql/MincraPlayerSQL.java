@@ -32,19 +32,13 @@ public class MincraPlayerSQL extends SQLManager {
         builder.append(mincraPlayer.getPlayerCooltime_max());
         builder.append(", cooltime_title = '");
         builder.append(mincraPlayer.getCooltimeTitle());
-        builder.append("', ");
-        //マテリアル
-        StringBuilder material = new StringBuilder();
-        for (int i=0; i<9; i++) {
-            material.append("material0");
-            material.append(i + 1);
-            material.append(" = '");
-            material.append(mincraPlayer.getMaterial(i));
-            material.append("', ");
-        }
+        builder.append("', materialInventory = '");
 
-        builder.append(material.toString());
-        builder.append("materialPoint = ");
+        StringBuilder titleBuilder = new StringBuilder("&#2d9ebd&f&lマテリアル &8残りスキルポイント: ");
+        titleBuilder.append(mincraPlayer.getMaterialPoint());
+
+        builder.append(inventoryToString(mincraPlayer.getMaterialInventory(), titleBuilder.toString()));
+        builder.append("', materialPoint = ");
         builder.append(mincraPlayer.getMaterialPoint());
         builder.append(" WHERE uuid = '");
         builder.append(mincraPlayer.getPlayerUUID());
@@ -86,11 +80,7 @@ public class MincraPlayerSQL extends SQLManager {
                 mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
                 mincraPlayer.setCooltimeTitle(rs.getString("cooltime_title"));
-
-                for (int i = 0; i<9; i++) {
-                    StringBuilder builder = new StringBuilder("material0");
-                    mincraPlayer.setMaterial(i, rs.getString(builder.append(i+1).toString()));
-                }
+                mincraPlayer.setMaterialInventory(stringToInventory(ChatUtil.setColorCodes(rs.getString("materialInventory"))));
                 mincraPlayer.setMaterialPoint(rs.getInt("materialPoint"));
             }
             stmt.close();
