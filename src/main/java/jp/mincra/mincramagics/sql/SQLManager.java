@@ -2,12 +2,9 @@ package jp.mincra.mincramagics.sql;
 
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.container.MincraPlayer;
 import jp.mincra.mincramagics.util.ChatUtil;
 
 import java.sql.*;
-import java.util.Map;
-import java.util.UUID;
 
 public class SQLManager {
 

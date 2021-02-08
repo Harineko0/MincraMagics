@@ -16,7 +16,7 @@ public class MincraPlayer {
     private String cooltimeTitle;
 
     private int materialPoint = 100;
-    private Inventory materialInventory = Bukkit.createInventory(null, 9, new StringBuilder(ChatUtil.setColorCodes("&#2d9ebd&f&lマテリアル &8残りスキルポイント: ")).append(materialPoint).toString());
+    private Inventory materialInventory = Bukkit.createInventory(null, 9, new StringBuilder(ChatUtil.setColorCodes("&#2a93b0&f&l[&#2d9ebd&f&lマテリアル&#2a93b0&f&l] &8残りSP: ")).append(materialPoint).toString());
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;

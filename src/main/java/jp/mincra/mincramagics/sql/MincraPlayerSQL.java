@@ -21,6 +21,8 @@ import java.util.UUID;
 
 public class MincraPlayerSQL extends SQLManager {
 
+    private String title = "&#2a93b0&f&l[&#2d9ebd&f&lマテリアル&#2a93b0&f&l] &8残りSP: ";
+
     //MincraPlayer型についての操作
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
 
@@ -34,10 +36,10 @@ public class MincraPlayerSQL extends SQLManager {
         builder.append(mincraPlayer.getCooltimeTitle());
         builder.append("', materialInventory = '");
 
-        StringBuilder titleBuilder = new StringBuilder("&#2d9ebd&f&lマテリアル &8残りスキルポイント: ");
+        StringBuilder titleBuilder = new StringBuilder(title);
         titleBuilder.append(mincraPlayer.getMaterialPoint());
 
-        builder.append(inventoryToString(mincraPlayer.getMaterialInventory(), titleBuilder.toString()));
+        builder.append(inventoryToString(mincraPlayer.getMaterialInventory(), titleBuilder.toString()).replace("'","@").replace("\\","*"));
         builder.append("', materialPoint = ");
         builder.append(mincraPlayer.getMaterialPoint());
         builder.append(" WHERE uuid = '");
@@ -46,6 +48,7 @@ public class MincraPlayerSQL extends SQLManager {
 
         String query = builder.toString();
 
+        ChatUtil.sendConsoleMessage(query);
         executeQuery(query);
     }
 
@@ -54,11 +57,12 @@ public class MincraPlayerSQL extends SQLManager {
 
         //insert
         if (isExistRecord(query)){
-            query = "INSERT INTO player (name, uuid, cooltime_value, cooltime_max) VALUES ('" +
+            query = "INSERT INTO player (name, uuid, cooltime_value, cooltime_max, materialInventory) VALUES ('" +
                     mincraPlayer.getPlayerName() + "', '" +
                     mincraPlayer.getPlayerUUID() + "', " +
                     mincraPlayer.getPlayerCooltime_value() + ", " +
-                    mincraPlayer.getPlayerCooltime_max() + ")";
+                    mincraPlayer.getPlayerCooltime_max() + ", '" +
+                    inventoryToString(mincraPlayer.getMaterialInventory(), title) + "')";
             executeQuery(query);
         } else {
             ChatUtil.sendConsoleMessage("レコードが既にplayerテーブルに存在しています。 name=" +
@@ -80,7 +84,7 @@ public class MincraPlayerSQL extends SQLManager {
                 mincraPlayer.setPlayerCooltime_value(rs.getFloat("cooltime_value"));
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
                 mincraPlayer.setCooltimeTitle(rs.getString("cooltime_title"));
-                mincraPlayer.setMaterialInventory(stringToInventory(ChatUtil.setColorCodes(rs.getString("materialInventory"))));
+                mincraPlayer.setMaterialInventory(stringToInventory(ChatUtil.setColorCodes(rs.getString("materialInventory").replace("@","'").replace("*","\\"))));
                 mincraPlayer.setMaterialPoint(rs.getInt("materialPoint"));
             }
             stmt.close();
@@ -120,7 +124,7 @@ public class MincraPlayerSQL extends SQLManager {
                 inventoryObject.put("slot", i);
                 inventoryObject.put("id", itemStack.getType());
 
-                if (nbtItem.hasNBTData()) {
+                if (!nbtItem.toString().equals("{}")) {
                     inventoryObject.put("tag", nbtItem.toString());
                 }
 
@@ -137,6 +141,7 @@ public class MincraPlayerSQL extends SQLManager {
     }
 
     private Inventory stringToInventory(String string) {
+
         JSONObject jsonObject = null;
 
         try {
@@ -152,16 +157,18 @@ public class MincraPlayerSQL extends SQLManager {
         for (int i=0, len=jsonArray.length(); i<len; i++) {
             JSONObject inventoryObject = jsonArray.getJSONObject(i);
 
-            ItemStack item = null;
-            item.setType(Material.valueOf(inventoryObject.getString("id")));
+            ItemStack item = new ItemStack(Material.valueOf(inventoryObject.getString("id")));
             item.setAmount(inventoryObject.getInt("count"));
 
             NBTItem nbt = new NBTItem(item);
-            nbt.mergeCompound(new NBTContainer(inventoryObject.getJSONObject("tag").toString()));
+
+            if (inventoryObject.has("tag")) {
+                nbt.mergeCompound(new NBTContainer(inventoryObject.getString("tag")));
+            }
 
             item = nbt.getItem();
 
-            inventory.setItem(i, item);
+            inventory.setItem(inventoryObject.getInt("slot"), item);
 
         }
 

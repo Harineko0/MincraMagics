@@ -2,7 +2,6 @@ package jp.mincra.mincramagics.command;
 
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
@@ -15,11 +14,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MincraCommands implements CommandExecutor {

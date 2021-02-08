@@ -1,7 +1,6 @@
 package jp.mincra.mincramagics.command;
 
 import jp.mincra.mincramagics.MincraMagics;
-import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

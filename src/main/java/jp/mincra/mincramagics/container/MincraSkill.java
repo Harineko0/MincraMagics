@@ -9,6 +9,7 @@ public class MincraSkill {
     private int exp_lv = 0;
     private int exp = 0;
     private float break_rate = 0;
+    private int skill_point;
 
     public float getBreak_rate() {
         return break_rate;
@@ -64,5 +65,13 @@ public class MincraSkill {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getSkill_point() {
+        return skill_point;
+    }
+
+    public void setSkill_point(int skill_point) {
+        this.skill_point = skill_point;
     }
 }

@@ -59,6 +59,10 @@ public class SkillManager {
                 if (skillObject.has("break_rate")) {
                     mincraSkill.setBreak_rate(skillObject.getFloat("break_rate"));
                 }
+                //skill_point
+                if (skillObject.has("skill_point")) {
+                    mincraSkill.setSkill_point(skillObject.getInt("skill_point"));
+                }
 
                 amount = amount + 1;
             }
