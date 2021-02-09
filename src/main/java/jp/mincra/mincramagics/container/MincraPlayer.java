@@ -92,11 +92,16 @@ public class MincraPlayer {
     }
 
     public String getMaterialInventoryTitle() {
+        /*
         String materialInventoryTitle = "&#2a93b0&f[&#2d9ebd&f&lマテリアル&#2a93b0&f] &8残りSP: &#2a93b0&f";
         StringBuilder builder = new StringBuilder(materialInventoryTitle);
         builder.append(materialPoint);
         finalMaterialInventoryTitle = builder.toString();
 
         return finalMaterialInventoryTitle;
+
+         */
+
+        return "&#2a93b0&f[&#2d9ebd&f&lマテリアル&#2a93b0&f]";
     }
 }

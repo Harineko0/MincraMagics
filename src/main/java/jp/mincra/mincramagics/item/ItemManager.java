@@ -160,8 +160,7 @@ public class ItemManager {
                         loreList = Arrays.asList(
                                 ChatColor.GREEN + mincraSkill.getLore(),
                                 ChatColor.GREEN + "クールタイム:" + spaceCooltime.toString() + ChatColor.GREEN + mincraSkill.getCooltime(),
-                                ChatColor.GREEN + "MP消費:" + spaceExp.toString() + ChatColor.GREEN + mincraSkill.getExp_lv(),
-                                ChatColor.GREEN + "必要SP: " + spaceSP.toString() + ChatColor.GREEN + mincraSkill.getSkill_point()
+                                ChatColor.GREEN + "MP消費:" + spaceExp.toString() + ChatColor.GREEN + mincraSkill.getExp_lv()
                         );
                         itemMeta.setLore(loreList);
                         item.setItemMeta(itemMeta);

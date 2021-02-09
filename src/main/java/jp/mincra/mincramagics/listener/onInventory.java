@@ -40,29 +40,7 @@ public class onInventory implements Listener {
         if (inventoryView.getTitle().contains("マテリアル")) {
 
             HumanEntity entity = event.getWhoClicked();
-            UUID uuid = entity.getUniqueId();
             InventoryAction action = event.getAction();
-            int materialPoint = MincraMagics.getPlayerManager().getMaterialPoint(uuid);
-
-            if (event.getRawSlot() < 9 && !isPickup(action)) {
-
-                if (event.getCursor() != null && !event.getCursor().getType().equals(Material.AIR)) {
-
-                    if (MincraMagics.getSkillManager().getSkillPoint(new NBTItem(event.getCursor()).getCompound("MincraMagics").getString("id")) + materialPoint < 0) {
-                        entity.sendMessage(ChatUtil.setColorCodes("&cスキルポイントが足りません！"));
-                        event.setCancelled(true);
-
-                    }
-                }
-                if (event.getCurrentItem() != null && !event.getCurrentItem().getType().equals(Material.AIR)) {
-
-                    if (MincraMagics.getSkillManager().getSkillPoint(new NBTItem(event.getCurrentItem()).getCompound("MincraMagics").getString("id")) + materialPoint < 0) {
-                        entity.sendMessage(ChatUtil.setColorCodes("&cスキルポイントが足りません！"));
-                        event.setCancelled(true);
-
-                    }
-                }
-            }
 
             switch (action) {
                 case PLACE_ALL:
@@ -71,22 +49,9 @@ public class onInventory implements Listener {
                             //マテリアルスロットに入れる
                             NBTItem nbtCursor = new NBTItem(event.getCursor());
 
-                            if (isMaterial(nbtCursor)) {
-                                reopenInventory(entity, uuid);
-
-                            } else {
+                            if (!isMaterial(nbtCursor)) {
                                 entity.sendMessage(ChatUtil.setColorCodes("&cマテリアルを選択してください！"));
                                 event.setCancelled(true);
-
-                            }
-                        }
-                    } else {
-                        if (!event.getCursor().getType().equals(Material.AIR)) {
-                            //マテリアルスロットに入れる
-                            NBTItem nbtCursor = new NBTItem(event.getCursor());
-
-                            if (isMaterial(nbtCursor)) {
-                                reopenInventory(entity, uuid);
 
                             }
                         }
@@ -99,10 +64,7 @@ public class onInventory implements Listener {
 
                         NBTItem nbtCurrent = new NBTItem(event.getCurrentItem());
 
-                        if (isMaterial(nbtCurrent)) {
-                            reopenInventory(entity, uuid);
-
-                        } else {
+                        if (!isMaterial(nbtCurrent)) {
                             entity.sendMessage(ChatUtil.setColorCodes("&cマテリアルを選択してください！"));
                             event.setCancelled(true);
 
