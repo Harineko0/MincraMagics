@@ -21,7 +21,6 @@ import java.util.UUID;
 
 public class MincraPlayerSQL extends SQLManager {
 
-    private String title = "&#2a93b0&f&l[&#2d9ebd&f&lマテリアル&#2a93b0&f&l] &8残りSP: ";
 
     //MincraPlayer型についての操作
     public void updateMincraPlayer(MincraPlayer mincraPlayer){
@@ -36,19 +35,14 @@ public class MincraPlayerSQL extends SQLManager {
         builder.append(mincraPlayer.getCooltimeTitle());
         builder.append("', materialInventory = '");
 
-        StringBuilder titleBuilder = new StringBuilder(title);
-        titleBuilder.append(mincraPlayer.getMaterialPoint());
 
-        builder.append(inventoryToString(mincraPlayer.getMaterialInventory(), titleBuilder.toString()).replace("'","@").replace("\\","*"));
-        builder.append("', materialPoint = ");
-        builder.append(mincraPlayer.getMaterialPoint());
-        builder.append(" WHERE uuid = '");
+        builder.append(inventoryToString(mincraPlayer.getMaterialInventory(), mincraPlayer.getMaterialInventoryTitle()).replace("'","@").replace("\\","*"));
+        builder.append("' WHERE uuid = '");
         builder.append(mincraPlayer.getPlayerUUID());
         builder.append("'");
 
         String query = builder.toString();
 
-        ChatUtil.sendConsoleMessage(query);
         executeQuery(query);
     }
 
@@ -62,7 +56,7 @@ public class MincraPlayerSQL extends SQLManager {
                     mincraPlayer.getPlayerUUID() + "', " +
                     mincraPlayer.getPlayerCooltime_value() + ", " +
                     mincraPlayer.getPlayerCooltime_max() + ", '" +
-                    inventoryToString(mincraPlayer.getMaterialInventory(), title) + "')";
+                    inventoryToString(mincraPlayer.getMaterialInventory(), mincraPlayer.getMaterialInventoryTitle()) + "')";
             executeQuery(query);
         } else {
             ChatUtil.sendConsoleMessage("レコードが既にplayerテーブルに存在しています。 name=" +
@@ -85,7 +79,6 @@ public class MincraPlayerSQL extends SQLManager {
                 mincraPlayer.setPlayerCooltime_max(rs.getFloat("cooltime_max"));
                 mincraPlayer.setCooltimeTitle(rs.getString("cooltime_title"));
                 mincraPlayer.setMaterialInventory(stringToInventory(ChatUtil.setColorCodes(rs.getString("materialInventory").replace("@","'").replace("*","\\"))));
-                mincraPlayer.setMaterialPoint(rs.getInt("materialPoint"));
             }
             stmt.close();
             rs.close();

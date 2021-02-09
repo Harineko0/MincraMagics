@@ -9,7 +9,7 @@ public class MincraSkill {
     private int exp_lv = 0;
     private int exp = 0;
     private float break_rate = 0;
-    private int skill_point;
+    private int skill_point = 0;
 
     public float getBreak_rate() {
         return break_rate;

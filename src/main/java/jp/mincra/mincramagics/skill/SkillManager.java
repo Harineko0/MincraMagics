@@ -74,6 +74,13 @@ public class SkillManager {
         return skillMap;
     }
 
+    public Integer getSkillPoint(String id) {
+        if (skillMap.containsKey(id)) {
+            return skillMap.get(id).getSkill_point();
+        }
+        return null;
+    }
+
     public void useSkill(Player player, String id) {
 
         if (skillMap.keySet().contains(id)) {

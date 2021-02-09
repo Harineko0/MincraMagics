@@ -136,6 +136,11 @@ public class ItemManager {
                     spaceBreak.append(" ");
                 }
 
+                StringBuilder spaceSP = new StringBuilder("        ");
+                if (String.valueOf(mincraSkill.getSkill_point()).length() <= 2) {
+                    spaceSP.append(" ");
+                }
+
                 List<String> loreList;
 
                 switch (type) {
@@ -155,7 +160,8 @@ public class ItemManager {
                         loreList = Arrays.asList(
                                 ChatColor.GREEN + mincraSkill.getLore(),
                                 ChatColor.GREEN + "クールタイム:" + spaceCooltime.toString() + ChatColor.GREEN + mincraSkill.getCooltime(),
-                                ChatColor.GREEN + "MP消費:" + spaceExp.toString() + ChatColor.GREEN + mincraSkill.getExp_lv()
+                                ChatColor.GREEN + "MP消費:" + spaceExp.toString() + ChatColor.GREEN + mincraSkill.getExp_lv(),
+                                ChatColor.GREEN + "必要SP: " + spaceSP.toString() + ChatColor.GREEN + mincraSkill.getSkill_point()
                         );
                         itemMeta.setLore(loreList);
                         item.setItemMeta(itemMeta);

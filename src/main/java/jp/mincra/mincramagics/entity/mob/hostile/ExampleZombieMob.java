@@ -17,6 +17,7 @@ public class ExampleZombieMob implements CustomEntitySpawnEvent {
 
         if (mcr_id.equals("example_zombie")) {
 
+            /*
             Zombie zombie = (Zombie) entity;
 
             MincraParticle mincraParticle = new MincraParticle();
@@ -41,6 +42,8 @@ public class ExampleZombieMob implements CustomEntitySpawnEvent {
                 }
             };
             timer.scheduleAtFixedRate(task,0,50);
+
+             */
         }
     }
 }

@@ -65,11 +65,15 @@ public class PlayerManager {
         return MincraPlayerMap.get(uuid).getMaterialInventory();
     }
 
-    public void setMaterialPoint(UUID uuid, Integer point) {
-        MincraPlayerMap.get(uuid).setMaterialPoint(point);
+    public void setMaterialPoint(UUID uuid) {
+        MincraPlayerMap.get(uuid).setMaterialPoint();
     }
     public Integer getMaterialPoint(UUID uuid) {
         return MincraPlayerMap.get(uuid).getMaterialPoint();
+    }
+
+    public String getMaterialInventoryTitle(UUID uuid) {
+        return MincraPlayerMap.get(uuid).getMaterialInventoryTitle();
     }
 
 
