@@ -62,7 +62,7 @@ public class BossBarUtil {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 100);
+        timer.scheduleAtFixedRate(task, 0, 50);
     }
 
     public static void setCooltimeBossBar(Player player, String skill_name, float cooltime_value) {

@@ -3,6 +3,7 @@ package jp.mincra.mincramagics.event;
 import jp.mincra.mincramagics.event.entity.CustomEntitySpawnEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
+import jp.mincra.mincramagics.event.player.PlayerUseMaterialEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -13,6 +14,7 @@ public class EventNotifier {
 
     private List<PlayerUseMagicRodEvent> playerUseMagicRod = new ArrayList<>();
     private List<PlayerUseMagicRodToEntityEvent> playerUseMagicRodToEntity = new ArrayList<>();
+    private List<PlayerUseMaterialEvent> playerUseMaterial = new ArrayList<>();
     private List<CustomEntitySpawnEvent> customEntitySpawn = new ArrayList<>();
 
     /**
@@ -42,6 +44,14 @@ public class EventNotifier {
         }
     }
 
+    public void runPlayerUseMaterial(Player player, String mcr_id) {
+        if (this.playerUseMaterial != null) {
+            for (PlayerUseMaterialEvent event : playerUseMaterial) {
+                event.onPlayerUseMaterial(player, mcr_id);
+            }
+        }
+    }
+
     /**
      * カスタムエンティティがスポーンしたときに実行
      * @param entity イベント
@@ -65,6 +75,9 @@ public class EventNotifier {
         }
         if (listener instanceof PlayerUseMagicRodToEntityEvent) {
             playerUseMagicRodToEntity.add((PlayerUseMagicRodToEntityEvent) listener);
+        }
+        if (listener instanceof PlayerUseMaterialEvent) {
+            playerUseMaterial.add((PlayerUseMaterialEvent) listener);
         }
         if (listener instanceof CustomEntitySpawnEvent) {
             customEntitySpawn.add((CustomEntitySpawnEvent) listener);
