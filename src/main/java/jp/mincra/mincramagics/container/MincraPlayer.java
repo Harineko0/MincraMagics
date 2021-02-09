@@ -102,6 +102,6 @@ public class MincraPlayer {
 
          */
 
-        return "&#2a93b0&f[&#2d9ebd&f&lマテリアル&#2a93b0&f]";
+        return "&#2a93b0&f&lマテリアル";
     }
 }
