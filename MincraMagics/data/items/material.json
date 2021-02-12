@@ -1,0 +1,19 @@
+[{
+    "id": "emerald",
+    "mcr_id": "material_move_1",
+    "nbt": {
+      "display":{
+        "Name":"{\"text\":\"緑水晶\",\"color\":\"#00ff3e\",\"bold\":true,\"italic\":false}",
+        "Lore":[]},
+      "CustomModelData": 10027,
+      "HideFlags": 1,
+      "Enchantments":[
+        {"id":"minecraft:fortune","lvl":1}
+      ],
+      "MincraMagics":{
+         "type": "material"
+      }
+    },
+    "craftable": false
+  }
+]

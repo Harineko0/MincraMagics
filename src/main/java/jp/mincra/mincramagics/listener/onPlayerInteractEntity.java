@@ -24,11 +24,19 @@ public class onPlayerInteractEntity implements Listener {
                 NBTItem nbtItem = new NBTItem(item);
 
                 if (nbtItem.hasKey("MincraMagics")) {
-                    e.setCancelled(true);
 
-                    if (nbtItem.getCompound("MincraMagics").getString("id").contains("rod")) {
-                        //魔法杖イベント実行
-                        MincraMagics.getEventNotifier().runPlayerUseMagicRodToEntity(player, e.getRightClicked(), nbtItem.getCompound("MincraMagics").getString("id"));
+                    String mcr_id = nbtItem.getCompound("MincraMagics").getString("id");
+
+                    if (mcr_id.contains("rod")) {
+
+                        e.setCancelled(true);
+
+                        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
+                            MincraMagics.getSkillManager().useSkill(player, mcr_id);
+
+                            //魔法杖イベント実行
+                            MincraMagics.getEventNotifier().runPlayerUseMagicRodToEntity(player, e.getRightClicked(), nbtItem.getCompound("MincraMagics").getString("id"));
+                        }
                     }
                 }
             }

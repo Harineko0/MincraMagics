@@ -22,56 +22,51 @@ public class BeastRod implements PlayerUseMagicRodEvent {
 
         if (mcr_id.contains("rod_beast")) {
 
-            if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
+            int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 
-                MincraMagics.getSkillManager().useSkill(player, mcr_id);
+            Location location = player.getLocation();
 
-                int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
+            List<ChatColor> chatColorList = new ArrayList<>(Arrays.asList(ChatColor.GREEN, ChatColor.BLUE, ChatColor.YELLOW, ChatColor.GOLD, ChatColor.RED));
+            List<DyeColor> dyeColorList = new ArrayList<>(Arrays.asList(DyeColor.GREEN, DyeColor.BLUE, DyeColor.YELLOW, DyeColor.ORANGE, DyeColor.RED));
+            List<Wolf> wolfList = new ArrayList<>(5);
 
-                Location location = player.getLocation();
+            MincraParticle mincraParticle = new MincraParticle();
+            mincraParticle.setRadius(2.4);
+            mincraParticle.setParticle(Particle.SPELL_INSTANT);
+            mincraParticle.drawMagicCircle(location, 5, 1);
 
-                List<ChatColor> chatColorList = new ArrayList<>(Arrays.asList(ChatColor.GREEN, ChatColor.BLUE, ChatColor.YELLOW, ChatColor.GOLD, ChatColor.RED));
-                List<DyeColor> dyeColorList = new ArrayList<>(Arrays.asList(DyeColor.GREEN, DyeColor.BLUE, DyeColor.YELLOW, DyeColor.ORANGE, DyeColor.RED));
-                List<Wolf> wolfList = new ArrayList<>(5);
+            location.getWorld().playSound(location, Sound.ENTITY_ZOMBIE_VILLAGER_CURE, (float) 0.1, 2);
 
-                MincraParticle mincraParticle = new MincraParticle();
-                mincraParticle.setRadius(2.4);
-                mincraParticle.setParticle(Particle.SPELL_INSTANT);
-                mincraParticle.drawMagicCircle(location, 5, 1);
+            for (int i = 0, amount = level * 2 - 1; i < amount; i++) {
+                Wolf wolf = (Wolf) player.getWorld().spawnEntity(location, EntityType.WOLF);
+                wolf.setCustomName(chatColorList.get(i) + "幻獣");
+                wolf.setAdult();
+                wolf.setOwner(player);
+                wolf.setBreed(false);
+                wolf.setCollarColor(dyeColorList.get(i));
+                wolf.addScoreboardTag("mcr_rod_beast");
 
-                location.getWorld().playSound(location, Sound.ENTITY_ZOMBIE_VILLAGER_CURE, (float) 0.1, 2);
+                mincraParticle.drawMagicCircle(wolf.getLocation(), 5, 1);
 
-                for (int i = 0, amount = level * 2 - 1; i < amount; i++) {
-                    Wolf wolf = (Wolf) player.getWorld().spawnEntity(location, EntityType.WOLF);
-                    wolf.setCustomName(chatColorList.get(i) + "幻獣");
-                    wolf.setAdult();
-                    wolf.setOwner(player);
-                    wolf.setBreed(false);
-                    wolf.setCollarColor(dyeColorList.get(i));
-                    wolf.addScoreboardTag("mcr_rod_beast");
+                wolfList.add(wolf);
 
-                    mincraParticle.drawMagicCircle(wolf.getLocation(), 5, 1);
-
-                    wolfList.add(wolf);
-
-                }
-
-                new BukkitRunnable() {
-                    List<Wolf> finalWolfList = wolfList;
-
-                    @Override
-                    public void run() {
-
-                        for (Wolf wolf : finalWolfList) {
-
-                            mincraParticle.drawMagicCircle(wolf.getLocation(), 5, 1);
-                            wolf.remove();
-
-                            this.cancel();
-                        }
-                    }
-                }.runTaskLater(MincraMagics.getInstance(), level * 200);
             }
+
+            new BukkitRunnable() {
+                List<Wolf> finalWolfList = wolfList;
+
+                @Override
+                public void run() {
+
+                    for (Wolf wolf : finalWolfList) {
+
+                        mincraParticle.drawMagicCircle(wolf.getLocation(), 5, 1);
+                        wolf.remove();
+
+                        this.cancel();
+                    }
+                }
+            }.runTaskLater(MincraMagics.getInstance(), level * 200);
         }
     }
 

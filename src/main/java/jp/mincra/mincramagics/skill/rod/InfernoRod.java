@@ -27,10 +27,6 @@ public class InfernoRod implements PlayerUseMagicRodEvent {
 
         if (mcr_id.contains("rod_inferno")) {
 
-            if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-                MincraMagics.getSkillManager().useSkill(player, mcr_id);
-
                 //メイン
                 this.player = player;
                 level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
@@ -63,7 +59,6 @@ public class InfernoRod implements PlayerUseMagicRodEvent {
                 mincraParticle.setParticle(Particle.FLAME);
                 mincraParticle.setRadius(2.4);
                 mincraParticle.drawMagicCircle(location.add(0, 0.25, 0), 6, 1, 3, 0.01, 0.05);
-            }
         }
     }
 

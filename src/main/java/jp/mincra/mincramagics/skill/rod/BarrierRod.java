@@ -23,18 +23,13 @@ public class BarrierRod implements PlayerUseMagicRodEvent,PlayerUseMagicRodToEnt
             int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 
             if (level == 1 || level == 2) {
+                 //メイン
+                Player target = (Player) entity;
+                target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, level * 20 * 60, level-1));
 
-                if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
+                //装飾
+                decoration(target.getLocation());
 
-                    MincraMagics.getSkillManager().useSkill(player, mcr_id);
-
-                    //メイン
-                    Player target = (Player) entity;
-                    target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, level * 20 * 60, level-1));
-
-                    //装飾
-                    decoration(target.getLocation());
-                }
             }
         }
     }

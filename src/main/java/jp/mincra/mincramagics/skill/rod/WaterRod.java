@@ -1,6 +1,5 @@
 package jp.mincra.mincramagics.skill.rod;
 
-import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.*;
@@ -18,17 +17,13 @@ public class WaterRod implements PlayerUseMagicRodEvent {
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
                 case 1:
-                    WaterOne(player, mcr_id);
+                    WaterOne(player);
                     break;
             }
         }
     }
 
-    public void WaterOne(Player player, String mcr_id) {
-
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-            MincraMagics.getSkillManager().useSkill(player, mcr_id);
+    public void WaterOne(Player player) {
 
             //メイン
             final int[] duration = {600};
@@ -81,5 +76,4 @@ public class WaterRod implements PlayerUseMagicRodEvent {
             mincraParticle.drawMagicCircle(location,5,1,4,0.01,0.1);
 
         }
-    }
 }

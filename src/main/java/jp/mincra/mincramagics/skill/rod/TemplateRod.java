@@ -28,14 +28,9 @@ public class TemplateRod implements PlayerUseMagicRodEvent {
 
     public void TemplateOne(Player player, String mcr_id) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-            MincraMagics.getSkillManager().useSkill(player, mcr_id);
-
             //メイン
 
             //装飾
 
-        }
     }
 }

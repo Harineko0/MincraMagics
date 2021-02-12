@@ -19,24 +19,20 @@ public class ExpRod implements PlayerUseMagicRodEvent {
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
                 case 1:
-                    ExpOne(player, mcr_id);
+                    ExpOne(player);
                     break;
 
                 case 2:
-                    ExpTwo(player, mcr_id);
+                    ExpTwo(player);
                     break;
 
                 case 3:
-                    ExpThree(player, mcr_id);
+                    ExpThree(player);
             }
         }
     }
 
-    public void ExpOne(Player player, String mcr_id) {
-
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-            MincraMagics.getSkillManager().useSkill(player, mcr_id);
+    public void ExpOne(Player player) {
 
             //事前装飾
             Location location = player.getLocation();
@@ -71,14 +67,9 @@ public class ExpRod implements PlayerUseMagicRodEvent {
                     this.cancel();
                 }
             }.runTaskLater(MincraMagics.getInstance(),80);
-        }
     }
 
-    public void ExpTwo(Player player, String mcr_id) {
-
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-            MincraMagics.getSkillManager().useSkill(player, mcr_id);
+    public void ExpTwo(Player player) {
 
             //事前装飾
             Location location = player.getLocation();
@@ -113,15 +104,10 @@ public class ExpRod implements PlayerUseMagicRodEvent {
                     this.cancel();
                 }
             }.runTaskLater(MincraMagics.getInstance(),80);
-        }
     }
 
 
-    public void ExpThree(Player player, String mcr_id) {
-
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-            MincraMagics.getSkillManager().useSkill(player, mcr_id);
+    public void ExpThree(Player player) {
 
             //メイン
             if (player.getLevel() < 5) {
@@ -141,5 +127,4 @@ public class ExpRod implements PlayerUseMagicRodEvent {
             mincraParticle.drawMagicCircle(location.add(0,0.25,0), 6, 1, 10, 0.03, 0);
 
         }
-    }
 }

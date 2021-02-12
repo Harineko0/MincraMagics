@@ -1,6 +1,5 @@
 package jp.mincra.mincramagics.skill.rod;
 
-import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import jp.mincra.mincramagics.util.ChatUtil;
@@ -19,26 +18,24 @@ public class JumpRod implements PlayerUseMagicRodEvent {
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
                 case 1:
-                    JumpOne(player, mcr_id);
+                    JumpOne(player);
                     break;
 
                 case 2:
-                    JumpTwo(player, mcr_id);
+                    JumpTwo(player);
                     break;
 
                 case 3:
-                    JumpThree(player, mcr_id);
+                    JumpThree(player);
             }
         }
     }
 
-    public void JumpOne(Player player, String mcr_id) {
+    public void JumpOne(Player player) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
             Location location = player.getLocation();
 
             if (location.getBlockY() < 170) {
-                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                 //メイン
                 player.setFallDistance(-5);
@@ -68,16 +65,13 @@ public class JumpRod implements PlayerUseMagicRodEvent {
             } else {
                 player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));
             }
-        }
     }
 
-    public void JumpTwo(Player player, String mcr_id) {
+    public void JumpTwo(Player player) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
             Location location = player.getLocation();
 
             if (location.getBlockY() < 170) {
-                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                 //メイン
                 player.setFallDistance(-12);
@@ -109,16 +103,13 @@ public class JumpRod implements PlayerUseMagicRodEvent {
             } else {
                 player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));
             }
-        }
     }
 
-    public void JumpThree(Player player, String mcr_id) {
+    public void JumpThree(Player player) {
 
-        if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
             Location location = player.getLocation();
 
             if (location.getBlockY() < 170) {
-                MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                 //メイン
                 player.setFallDistance(-16);
@@ -150,6 +141,5 @@ public class JumpRod implements PlayerUseMagicRodEvent {
             } else {
                 player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));
             }
-        }
     }
 }

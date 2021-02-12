@@ -19,13 +19,10 @@ public class MoveRod implements PlayerUseMagicRodEvent {
 
             int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 
-            if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
                 Location loc = player.getLocation();
 
 
                 if (loc.getBlockY() < 170) {
-
-                    MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                     //メイン
                     float yaw = player.getLocation().getYaw();
@@ -49,6 +46,5 @@ public class MoveRod implements PlayerUseMagicRodEvent {
                     player.sendMessage(ChatUtil.setColorCodes("&c高すぎるため使えません！"));
                 }
             }
-        }
     }
 }

@@ -25,10 +25,6 @@ public class CureRod implements PlayerUseMagicRodEvent {
 
             int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 
-            if (MincraMagics.getSkillManager().canUseSkill(player, mcr_id)) {
-
-                MincraMagics.getSkillManager().useSkill(player, mcr_id);
-
                 //装飾
                 MincraParticle mincraParticle = new MincraParticle();
                 mincraParticle.setRadius(2.0);
@@ -81,7 +77,6 @@ public class CureRod implements PlayerUseMagicRodEvent {
                         this.cancel();
                     }
                 }.runTaskLater(MincraMagics.getInstance(), 40);
-            }
         }
     }
 }
