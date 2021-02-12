@@ -12,3 +12,7 @@ commands:
   skill:
     description: マテリアルに関するコマンド。
     usage: /<command>
+  translate:
+    description: チャットの翻訳を行うコマンド。
+    aliases: tr
+    usage: /<command> [ja, en, ...] [ja, en, ...] [TEXT]

@@ -9,7 +9,9 @@ public class onPlayerChat implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
+
         String translated = ChatUtil.setColorCodes(e.getMessage());
         e.setMessage(translated);
+
     }
 }
