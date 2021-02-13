@@ -75,6 +75,9 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onEntitySpawn(), this);
         getServer().getPluginManager().registerEvents(new onEntityDeath(), this);
         getServer().getPluginManager().registerEvents(new onInventory(), this);
+        getServer().getPluginManager().registerEvents(new onEntityTargetLivingEntity(), this);
+        getServer().getPluginManager().registerEvents(new onEntityDamage(), this);
+        getServer().getPluginManager().registerEvents(new onEntityDamageByEntity(), this);
         //独自リスナー
         getEventNotifier();
         //Skills

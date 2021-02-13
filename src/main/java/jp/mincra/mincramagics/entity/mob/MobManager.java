@@ -1,5 +1,6 @@
 package jp.mincra.mincramagics.entity.mob;
 
+import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
 import de.tr7zw.changeme.nbtapi.NBTList;
@@ -52,7 +53,6 @@ public class MobManager extends SQLManager {
         for (int i=0, len=jsonArray.length(); i<len; i++) {
 
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            ChatUtil.sendConsoleMessage(jsonObject.toString());
 
             if (jsonObject.has("mcr_id")) {
                 String mcr_id = jsonObject.getString("mcr_id");
@@ -80,15 +80,8 @@ public class MobManager extends SQLManager {
 
     public void setEntityNBT(Entity entity, String mcr_id) {
 
-        JSONObject jsonObject;
-
         NBTEntity nbtEntity = new NBTEntity(entity);
         String nbtString;
-
-        ChatUtil.sendConsoleMessage(mcr_id);
-
-        jsonObject = MCRIDJsonMap.get(mcr_id);
-        EntityType mapEntityType = EntityType.valueOf(jsonObject.getString("id").toUpperCase());
 
         //バニラのNBT
         nbtString = MCRIDJsonMap.get(mcr_id).getJSONObject("nbt").toString();
@@ -143,12 +136,32 @@ public class MobManager extends SQLManager {
         }
     }
 
+
+    public boolean isCustomEntity(String mcr_id) {
+        return MCRIDJsonMap.containsKey(mcr_id);
+    }
+
+    public boolean isCustomEntity(Entity entity) {
+
+        NBTEntity nbtEntity = new NBTEntity(entity);
+        NBTList<String> tagsList = nbtEntity.getStringList("Tags");
+
+        for (String tag : tagsList) {
+            if (tag.startsWith("{")) {
+
+                JSONObject jsonObject = new JSONObject(tag);
+                return MCRIDJsonMap.containsKey(jsonObject.getString("id"));
+
+            }
+        }
+        return false;
+    }
     /**
      * エンティティタイプがランダムスポーンリストに入っているかどうかを取得します。
      * @param entityType エンティティタイプ
      * @return boolean
      */
-    public boolean isExistsEntityType(EntityType entityType) {
+    public boolean isRandomSpawn(EntityType entityType) {
         return entityChanceSumMap.containsKey(entityType);
     }
 
@@ -206,15 +219,6 @@ public class MobManager extends SQLManager {
                     }
                 }
             }
-        }
-    }
-
-
-    public boolean isExistEntity(String mcr_id) {
-        if (MCRIDJsonMap.containsKey(mcr_id)) {
-            return true;
-        } else {
-            return false;
         }
     }
 

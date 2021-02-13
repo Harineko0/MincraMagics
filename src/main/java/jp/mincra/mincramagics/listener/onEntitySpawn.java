@@ -12,7 +12,7 @@ public class onEntitySpawn implements Listener {
     public void onEntitySpawn(EntitySpawnEvent event) {
         Entity entity = event.getEntity();
 
-        if (MincraMagics.getMobManager().isExistsEntityType(entity.getType()))
+        if (MincraMagics.getMobManager().isRandomSpawn(entity.getType()))
             MincraMagics.getMobManager().setEntityRandomNBT(entity);
     }
 }

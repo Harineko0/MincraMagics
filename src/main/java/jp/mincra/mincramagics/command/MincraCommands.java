@@ -1,7 +1,5 @@
 package jp.mincra.mincramagics.command;
 
-import de.tr7zw.changeme.nbtapi.NBTContainer;
-import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
@@ -133,7 +131,7 @@ public class MincraCommands implements CommandExecutor {
     private boolean summon(Entity caster, @NotNull String[] args) {
         if (caster instanceof Player) {
 
-            if (MincraMagics.getMobManager().isExistEntity(args[1])) {
+            if (MincraMagics.getMobManager().isCustomEntity(args[1])) {
 
                 JSONObject entityJSONObject = MincraMagics.getMobManager().getEntityJSONObject(args[1]);
                 String mcr_id = entityJSONObject.getString("mcr_id");
