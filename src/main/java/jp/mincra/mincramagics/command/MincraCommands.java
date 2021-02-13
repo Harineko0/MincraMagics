@@ -133,15 +133,13 @@ public class MincraCommands implements CommandExecutor {
 
             if (MincraMagics.getMobManager().isCustomEntity(args[1])) {
 
-                JSONObject entityJSONObject = MincraMagics.getMobManager().getEntityJSONObject(args[1]);
-                String mcr_id = entityJSONObject.getString("mcr_id");
-
                 Location location = caster.getLocation();
-                Entity entity = caster.getWorld().spawnEntity(location, EntityType.valueOf(entityJSONObject.getString("id").toUpperCase()));
 
-                MincraMagics.getMobManager().setEntityNBT(entity, mcr_id);
+                Entity entity = caster.getWorld().spawnEntity(location, MincraMagics.getMobManager().getEntityType(args[1]));
 
-                MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, mcr_id);
+                MincraMagics.getMobManager().setEntityNBT(entity, args[1]);
+
+                MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, args[1]);
 
                 caster.sendMessage(ChatUtil.debug(args[1] + "を召喚しました。"));
 

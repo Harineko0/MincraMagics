@@ -81,16 +81,12 @@ public class MobManager extends SQLManager {
     public void setEntityNBT(Entity entity, String mcr_id) {
 
         NBTEntity nbtEntity = new NBTEntity(entity);
-        String nbtString;
-
-        //バニラのNBT
-        nbtString = MCRIDJsonMap.get(mcr_id).getJSONObject("nbt").toString();
+        String nbtString = MCRIDJsonMap.get(mcr_id).getJSONObject("nbt").toString();
 
         if (nbtString != null) {
             nbtEntity.mergeCompound(new NBTContainer(nbtString));
 
         }
-
         setStatusNBT(nbtEntity, mcr_id);
     }
 
@@ -174,13 +170,18 @@ public class MobManager extends SQLManager {
         //Tagsで管理するオリジナルのNBT
         NBTList<String> tagsList = nbtEntity.getStringList("Tags");
 
-        JSONObject statusObject = getMobStatus(mcr_id);
-        statusObject.put("id", mcr_id);
-        String status = statusObject.toString();
+        JSONObject statusObject = new JSONObject();
 
+        if (MCRIDJsonMap.get(mcr_id).has("status")) {
+            statusObject = MCRIDJsonMap.get(mcr_id).getJSONObject("status");
+        }
+
+        String status = statusObject.toString();
         if (status != null) {
             tagsList.add(status);
         }
+
+        statusObject.put("id", mcr_id);
     }
 
     public JSONObject getMobNBT(String mcr_id) {
@@ -190,12 +191,6 @@ public class MobManager extends SQLManager {
         return null;
     }
 
-    public JSONObject getMobStatus(String mcr_id) {
-        if (MCRIDJsonMap.get(mcr_id).has("status")) {
-            return MCRIDJsonMap.get(mcr_id).getJSONObject("status");
-        }
-        return null;
-    }
 
     /**
      * 全てのカスタムエンティティでCustomEntitySpawnを実行する
@@ -223,6 +218,11 @@ public class MobManager extends SQLManager {
     }
 
     public JSONObject getEntityJSONObject(String mcr_id) {
-        return MCRIDJsonMap.getOrDefault(mcr_id, null);
+        JSONObject returnObject = MCRIDJsonMap.getOrDefault(mcr_id, null);
+        return returnObject;
+    }
+
+    public EntityType getEntityType(String mcr_id) {
+        return EntityType.valueOf(MCRIDJsonMap.get(mcr_id).getString("id").toUpperCase());
     }
 }

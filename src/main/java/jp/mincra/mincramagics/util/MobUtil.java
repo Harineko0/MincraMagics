@@ -12,7 +12,15 @@ public class MobUtil {
 
     public enum DamageType {
         Physical,
-        Magic
+        Fall,
+        Projectile,
+        Magic,
+        Fire,
+        Water,
+        Ice,
+        Thunder,
+        Heaven,
+        End
     }
 
     /**
@@ -148,18 +156,18 @@ public class MobUtil {
     }
 
     /**
-     * エンティティの物理耐性を返します。
+     * エンティティの耐性値を返します。
      * @param entity 対象のエンティティ
      * @return Double
      */
-    public static Double getPhysicalDEF(Entity entity) {
+    public static Double getDEF(Entity entity, DamageType damageType) {
 
         JSONObject jsonObject = getStatusJSONObject(entity);
 
         if (jsonObject != null && jsonObject.has("DEF")) {
 
-            if (jsonObject.getJSONObject("DEF").has("PhysicalDEF")) {
-                return jsonObject.getJSONObject("DEF").getDouble("PhysicalDEF");
+            if (jsonObject.getJSONObject("DEF").has(damageType.toString())) {
+                return jsonObject.getJSONObject("DEF").getDouble(damageType.toString());
 
             }
         }

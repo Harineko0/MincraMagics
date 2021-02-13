@@ -26,7 +26,7 @@ public class onEntityTargetLivingEntity implements Listener {
         } else {
             if (!caster.getType().equals(EntityType.PLAYER)) {
 
-                MobUtil.unsetHealthBar((LivingEntity) caster);
+                MobUtil.unsetHealthBar(caster);
             }
 
         }
