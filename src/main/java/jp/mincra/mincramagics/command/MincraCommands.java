@@ -141,12 +141,7 @@ public class MincraCommands implements CommandExecutor {
                 Location location = caster.getLocation();
                 Entity entity = caster.getWorld().spawnEntity(location, EntityType.valueOf(entityJSONObject.getString("id").toUpperCase()));
 
-                NBTEntity nbtEntity = new NBTEntity(entity);
-                nbtEntity.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
-
-                StringBuilder builder = new StringBuilder("mcr_");
-                builder.append(mcr_id);
-                nbtEntity.getStringList("Tags").add(builder.toString());
+                MincraMagics.getMobManager().setEntityNBT(entity, mcr_id);
 
                 MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, mcr_id);
 

@@ -86,7 +86,7 @@ public class MincraTabCompleter implements TabCompleter {
 
         //summon
         if (args.length == 2) {
-            for (String key : MincraMagics.getMobManager().getEntityJsonMap().keySet()) {
+            for (String key : MincraMagics.getMobManager().getMCRIDJsonMap().keySet()) {
                 if (key.contains(args[1])) {
                     completions.add(key);
                 }
