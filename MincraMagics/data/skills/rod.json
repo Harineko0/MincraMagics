@@ -1,173 +1,38 @@
 [
   {
-    "id": "rod_move_1",
-    "name": "&a&l翠水晶の杖lv1",
-    "lore": "自分自身を少し加速させる。",
-    "cooltime": 0,
+    "id": "material_move_1",
+    "name": "&#00ff3e&f&l緑水晶",
+    "lore": "-強化魔法-追加効果:移動速度上昇",
+    "cooltime": 15,
     "exp_lv": 0,
     "exp": 0,
-    "break_rate": 0.01
+    "skill_point": 20
   },
   {
-    "id": "rod_move_2",
-    "name": "&a&l翠水晶の杖lv2",
-    "lore": "自分自身を加速させる。",
-    "cooltime": 0,
+    "id": "material_move_2",
+    "name": "&#00ff3e&f&l翠水晶",
+    "lore": "-強化魔法-追加効果:移動速度上昇",
+    "cooltime": 7.5,
     "exp_lv": 0,
     "exp": 0,
-    "break_rate": 0.01
+    "skill_point": 20
   },
   {
-    "id": "rod_move_3",
-    "name": "&a&l翠水晶の杖lv3",
-    "lore": "自分自身を大きく加速させる。",
-    "cooltime": 0,
-    "exp_lv": 0,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_jump_1",
-    "name": "&#006dff&f&l蒼水晶の杖lv1",
-    "lore": "空中で小さくジャンプする。",
-    "cooltime": 0.8,
-    "exp_lv": 0,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_jump_2",
-    "name": "&#006dff&f&l蒼水晶の杖lv2",
-    "lore": "空中でジャンプする。",
-    "cooltime": 1.4,
-    "exp_lv": 1,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_jump_3",
-    "name": "&#006dff&f&l蒼水晶の杖lv3",
-    "lore": "空中で大きくジャンプする。",
-    "cooltime": 2.0,
-    "exp_lv": 0,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_exp_1",
-    "name": "&#00ec9a&f&lエクスぺの杖lv1",
-    "lore": "MPを小回復する。",
-    "cooltime": 5.0,
-    "exp_lv": 0,
-    "exp": 0,
-    "break_rate": 0.1
-  },
-  {
-    "id": "rod_exp_2",
-    "name": "&#00ec9a&f&lエクスぺの杖lv2",
-    "lore": "MPを中回復する。",
-    "cooltime": 5.0,
-    "exp_lv": 2,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_exp_3",
-    "name": "&#00ec9a&f&lエクスぺの杖lv3",
-    "lore": "MPを小回復する。",
-    "cooltime": 0,
-    "exp_lv": 0,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_inferno_1",
-    "name": "&#e60202&f&lインフェルノの杖lv1",
-    "lore": "灼熱の炎に抱かれろ。",
-    "cooltime": 1,
-    "exp_lv": 1,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_inferno_2",
-    "name": "&#e60202&f&lインフェルノの杖lv2",
-    "lore": "灼熱の炎に抱かれろ。",
+    "id": "material_jump_1",
+    "name": "&#006dff&f&l青水晶",
+    "lore": "-強化魔法-追加効果:移動速度上昇",
     "cooltime": 2,
-    "exp_lv": 4,
+    "exp_lv": 0,
     "exp": 0,
-    "break_rate": 0.01
+    "skill_point": 20
   },
   {
-    "id": "rod_inferno_3",
-    "name": "&#e60202&f&lインフェルノの杖lv3",
-    "lore": "灼熱の炎に抱かれろ。",
-    "cooltime": 3,
-    "exp_lv": 6,
-    "exp": 0,
-    "break_rate": 0.05
-  },
-  {
-    "id": "rod_cure_1",
-    "name": "&#ec463a&f&l癒しの杖lv1",
-    "lore": "周囲3マスの味方の体力を少量回復する。",
-    "cooltime": 2,
-    "exp_lv": 2,
-    "exp": 0,
-    "break_rate": 0.1
-  },
-  {
-    "id": "rod_cure_2",
-    "name": "&#ec463a&f&l癒しの杖lv2",
-    "lore": "周囲6マスの味方の体力を回復する。",
+    "id": "material_jump_2",
+    "name": "&#006dff&f&l蒼水晶",
+    "lore": "-強化魔法-追加効果:移動速度上昇",
     "cooltime": 4,
-    "exp_lv": 2,
-    "exp": 0,
-    "break_rate": 0.1
-  },
-  {
-    "id": "rod_cure_3",
-    "name": "&#ec463a&f&l癒しの杖lv3",
-    "lore": "周囲3マスの味方の体力を大きく回復する。",
-    "cooltime": 6,
-    "exp_lv": 6,
-    "exp": 0,
-    "break_rate": 0.1
-  },
-  {
-    "id": "rod_water_1",
-    "name": "&#2863df&f&l水杖lv1",
-    "lore": "水中での移動速度が上昇する。",
-    "cooltime": 30,
     "exp_lv": 0,
     "exp": 0,
-    "break_rate": 0.1
-  },
-  {
-    "id": "rod_barrier_1",
-    "name": "&#6f7695&f&l結界の書lv1",
-    "lore": "右クリックした味方の防御力を上昇させる。",
-    "cooltime": 0,
-    "exp_lv": 3,
-    "exp": 0,
-    "break_rate": 0.1
-  },
-  {
-    "id": "rod_barrier_2",
-    "name": "&#6f7695&f&l結界の書lv2",
-    "lore": "右クリックした味方の防御力を大きく上昇させる。",
-    "cooltime": 0,
-    "exp_lv": 6,
-    "exp": 0,
-    "break_rate": 0.01
-  },
-  {
-    "id": "rod_barrier_3",
-    "name": "&#6f7695&f&l結界の書lv3",
-    "lore": "周囲の味方の防御力を大きく上昇させる。",
-    "cooltime": 6,
-    "exp_lv": 9,
-    "exp": 0,
-    "break_rate": 0.01
+    "skill_point": 20
   }
 ]

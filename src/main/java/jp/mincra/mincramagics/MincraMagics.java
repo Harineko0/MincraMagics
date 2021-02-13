@@ -11,6 +11,7 @@ import jp.mincra.mincramagics.listener.*;
 import jp.mincra.mincramagics.property.JSONManager;
 import jp.mincra.mincramagics.property.PropertyManager;
 import jp.mincra.mincramagics.skill.SkillManager;
+import jp.mincra.mincramagics.skill.material.JumpMaterial;
 import jp.mincra.mincramagics.skill.material.MoveMaterial;
 import jp.mincra.mincramagics.skill.rod.*;
 import jp.mincra.mincramagics.sql.SQLManager;
@@ -90,6 +91,7 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new DestroyRod());
         //material
         eventNotifier.registerEvents(new MoveMaterial());
+        eventNotifier.registerEvents(new JumpMaterial());
         //Mobs
         eventNotifier.registerEvents(new ExampleZombieMob());
         eventNotifier.registerEvents(new BeastRodMob());
