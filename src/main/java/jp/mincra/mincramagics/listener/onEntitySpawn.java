@@ -2,11 +2,13 @@ package jp.mincra.mincramagics.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
+import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Random;
@@ -34,9 +36,15 @@ public class onEntitySpawn implements Listener {
                     NBTEntity nbtEntity = new NBTEntity(entity);
                     nbtEntity.mergeCompound(new NBTContainer(MincraMagics.getMobManager().getMobNBT(mcr_id).toString()));
 
-                    StringBuffer buffer = new StringBuffer("mcr_");
-                    buffer.append(mcr_id);
-                    nbtEntity.getStringList("Tags").add(buffer.toString());
+//                    NBTList<String> tagsList = nbtEntity.getStringList("Tags");
+//
+//                    JSONObject statusObject = MincraMagics.getMobManager().getMobStatus(mcr_id);
+//                    statusObject.put("id", mcr_id);
+//                    String status = statusObject.toString();
+//
+//                    if (status != null) {
+//                        tagsList.add(status);
+//                    }
 
                     MincraMagics.getEventNotifier().runCustomEntitySpawn(event.getEntity(), mcr_id);
 

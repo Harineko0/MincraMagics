@@ -2,7 +2,6 @@ package jp.mincra.mincramagics;
 
 import jp.mincra.mincramagics.command.*;
 import jp.mincra.mincramagics.entity.mob.MobManager;
-import jp.mincra.mincramagics.entity.mob.hostile.BeastRodMob;
 import jp.mincra.mincramagics.entity.mob.hostile.ExampleZombieMob;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.event.EventNotifier;
@@ -94,7 +93,6 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new JumpMaterial());
         //Mobs
         eventNotifier.registerEvents(new ExampleZombieMob());
-        eventNotifier.registerEvents(new BeastRodMob());
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));

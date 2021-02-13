@@ -5,6 +5,7 @@ import de.tr7zw.changeme.nbtapi.NBTEntity;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
+import jp.mincra.mincramagics.util.MobUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -18,6 +19,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
+
+import java.util.List;
+
+import static jp.mincra.mincramagics.util.MobUtil.DamageType.Magic;
 
 public class MincraCommands implements CommandExecutor {
 
@@ -43,6 +48,14 @@ public class MincraCommands implements CommandExecutor {
             switch (args[0]) {
                 case "test":
                     if (caster instanceof Player) {
+
+                        List<Entity> entityList = caster.getNearbyEntities(10,10,10);
+
+                        for (Entity entity : entityList) {
+                            MobUtil.damage(entity, 10, Magic);
+
+                        }
+
                         return true;
                     }
 

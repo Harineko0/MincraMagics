@@ -1,5 +1,7 @@
 package jp.mincra.mincramagics.entity.mob;
 
+import de.tr7zw.changeme.nbtapi.NBTEntity;
+import de.tr7zw.changeme.nbtapi.NBTList;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.util.ChatUtil;
@@ -86,6 +88,13 @@ public class MobManager extends SQLManager {
         return null;
     }
 
+    public JSONObject getMobStatus(String mcr_id) {
+        if (entityJsonMap.get(mcr_id).has("status")) {
+            return entityJsonMap.get(mcr_id).getJSONObject("status");
+        }
+        return null;
+    }
+
     /**
      * 全てのカスタムエンティティでCustomEntitySpawnを実行する
      */
@@ -93,12 +102,17 @@ public class MobManager extends SQLManager {
 
         for (World world : Bukkit.getWorlds()) {
 
+            NBTEntity nbtEntity;
+
             for (Entity entity : world.getEntities()) {
 
-                for (String tag : entity.getScoreboardTags()) {
+                nbtEntity = new NBTEntity(entity);
+                NBTList<String> tagsList = nbtEntity.getStringList("Tags");
 
-                    if (tag != null && tag.contains("mcr_")) {
-                        MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, tag.substring(4));
+                for (String tag : tagsList) {
+
+                    if (tag != null && tag.contains("id")) {
+                        MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, new JSONObject(tag).getString("id"));
 
                     }
                 }
