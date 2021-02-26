@@ -2,6 +2,7 @@ package jp.mincra.mincramagics.entity.player;
 
 import jp.mincra.mincramagics.container.MincraPlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -76,6 +77,12 @@ public class PlayerManager {
         return MincraPlayerMap.get(uuid).getMaterialInventoryTitle();
     }
 
+    public void setDeadLocation(UUID uuid, Location deadLocation) {
+        MincraPlayerMap.get(uuid).setDeadLocation(deadLocation);
+    }
+    public Location getDeadLocation(UUID uuid) {
+        return MincraPlayerMap.get(uuid).getDeadLocation();
+    }
 
     //オンラインプレイヤー
     public Player[] getOnlinePlayerList(){

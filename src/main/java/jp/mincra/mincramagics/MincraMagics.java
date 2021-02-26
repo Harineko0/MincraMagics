@@ -1,5 +1,7 @@
 package jp.mincra.mincramagics;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import jp.mincra.mincramagics.command.*;
 import jp.mincra.mincramagics.entity.mob.MobManager;
 import jp.mincra.mincramagics.entity.mob.hostile.ExampleZombieMob;
@@ -33,6 +35,8 @@ public final class MincraMagics extends JavaPlugin {
     private static JSONManager jsonManager;
     private static ItemManager itemManager;
     private static SkillManager skillManager;
+
+    private static ProtocolManager protocolManager;
 
     @Override
     public void onEnable() {
@@ -78,6 +82,7 @@ public final class MincraMagics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onEntityTargetLivingEntity(), this);
         getServer().getPluginManager().registerEvents(new onEntityDamage(), this);
         getServer().getPluginManager().registerEvents(new onEntityDamageByEntity(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerDeath(), this);
         //独自リスナー
         getEventNotifier();
         //Skills
@@ -181,6 +186,12 @@ public final class MincraMagics extends JavaPlugin {
         if (skillManager == null)
             skillManager = new SkillManager();
         return skillManager;
+    }
+
+    public static ProtocolManager getProtocolManager() {
+        if (protocolManager == null)
+            protocolManager = ProtocolLibrary.getProtocolManager();
+        return protocolManager;
     }
 }
 

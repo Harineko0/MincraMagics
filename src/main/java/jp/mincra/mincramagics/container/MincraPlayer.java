@@ -4,6 +4,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,6 +21,8 @@ public class MincraPlayer {
 
     private int materialPoint = 100;
     private Inventory materialInventory = Bukkit.createInventory(null, 9, new StringBuilder(ChatUtil.setColorCodes("&#2a93b0&f[&#2d9ebd&f&lマテリアル&#2a93b0&f] &8残りSP: ")).append(materialPoint).toString());
+
+    private Location deadLocation;
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
@@ -102,5 +105,12 @@ public class MincraPlayer {
          */
 
         return "&#2a93b0&f&lマテリアル";
+    }
+
+    public Location getDeadLocation() {
+        return deadLocation;
+    }
+    public void setDeadLocation(Location deadLocation) {
+        this.deadLocation = deadLocation;
     }
 }

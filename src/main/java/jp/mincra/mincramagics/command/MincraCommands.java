@@ -1,11 +1,14 @@
 package jp.mincra.mincramagics.command;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
 import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.util.BossBarUtil;
 import jp.mincra.mincramagics.util.ChatUtil;
 import jp.mincra.mincramagics.util.MobUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,9 +18,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static jp.mincra.mincramagics.util.MobUtil.DamageType.Magic;
@@ -47,12 +51,42 @@ public class MincraCommands implements CommandExecutor {
                 case "test":
                     if (caster instanceof Player) {
 
-                        List<Entity> entityList = caster.getNearbyEntities(10,10,10);
+                        Entity creeper = caster.getWorld().spawnEntity(caster.getLocation(), EntityType.CREEPER);
 
-                        for (Entity entity : entityList) {
-                            MobUtil.damage(entity, 10, Magic);
+                        PacketContainer packet = MincraMagics.getProtocolManager().createPacket(PacketType.Play.Server.CAMERA);
 
+                        packet.getIntegers().write(0, creeper.getEntityId());
+
+                        try {
+                            MincraMagics.getProtocolManager().sendServerPacket((Player) caster, packet);
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
                         }
+
+                        creeper.remove();
+
+                        MincraMagics.getPlayerManager().setDeadLocation(caster.getUniqueId(), caster.getLocation());
+
+                        ((Player) caster).setHealth(0);
+                    }
+                    return true;
+
+                case "test2":
+                    if (caster instanceof Player) {
+
+                        Player player = (Player) caster;
+                        player.setGameMode(GameMode.SPECTATOR);
+
+                        Entity pig = player.getWorld().spawnEntity(player.getLocation(),EntityType.PIG);
+                        player.setSpectatorTarget(pig);
+                        pig.remove();
+//
+//                        List<Entity> entityList = caster.getNearbyEntities(10,10,10);
+//
+//                        for (Entity entity : entityList) {
+//                            MobUtil.damage(entity, 10, Magic);
+//
+//                        }
 
                         return true;
                     }

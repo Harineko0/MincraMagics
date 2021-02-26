@@ -10,6 +10,9 @@ import org.json.JSONObject;
 
 public class MobUtil {
 
+    /**
+     * DEFで軽減できるダメージの種類です。
+     */
     public enum DamageType {
         Physical,
         Fall,
@@ -31,23 +34,8 @@ public class MobUtil {
      */
     public static void damage(Entity entity, double amount, DamageType damageType) {
 
-        NBTEntity nbtEntity = new NBTEntity(entity);
-        NBTList<String> tagsList = nbtEntity.getStringList("Tags");
-        JSONObject defObject = null;
-
-        //モブの防御力を取得
-        for (String tag : tagsList) {
-            if (tag.contains("DEF")) {
-                defObject = new JSONObject(tag).getJSONObject("DEF");
-            }
-        }
-
-        //ダメージ計算
-        if (defObject != null) {
-            if (defObject.has(damageType.toString()))
-                amount *= defObject.getFloat(damageType.toString());
-
-        }
+        if (getDEF(entity, damageType) != null)
+            amount *= getDEF(entity, damageType);
 
         //ダメージ付与
         ((LivingEntity) entity).damage(amount);
@@ -167,7 +155,14 @@ public class MobUtil {
         if (jsonObject != null && jsonObject.has("DEF")) {
 
             if (jsonObject.getJSONObject("DEF").has(damageType.toString())) {
-                return jsonObject.getJSONObject("DEF").getDouble(damageType.toString());
+
+                double def = jsonObject.getJSONObject("DEF").getDouble(damageType.toString());
+
+                //def>1だと防御力がマイナスになる
+                if (def > 1)
+                    return 0d;
+
+                return 1 - def;
 
             }
         }

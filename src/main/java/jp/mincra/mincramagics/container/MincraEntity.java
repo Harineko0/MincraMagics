@@ -22,4 +22,5 @@ public class MincraEntity {
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
+
 }
