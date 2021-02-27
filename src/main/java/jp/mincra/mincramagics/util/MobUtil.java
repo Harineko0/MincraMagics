@@ -64,24 +64,30 @@ public class MobUtil {
      * エンティティの名前を体力バーに変更します。
      * @param entity 対象のエンティティ
      */
-    public static void setHealthBar(LivingEntity entity) {
-        double healthRate = entity.getHealth() / entity.getMaxHealth();
-        int barAmount = (int) Math.floor(healthRate * 10);
+    public static void setHealthBar(Entity entity) {
 
-        StringBuilder redBarBuilder = new StringBuilder();
+        if (entity instanceof LivingEntity) {
 
-        for (int i = 0; i < barAmount; i++) {
-            redBarBuilder.append(" ");
+            LivingEntity livingEntity = (LivingEntity) entity;
+
+            double healthRate = livingEntity.getHealth() / livingEntity.getMaxHealth();
+            int barAmount = (int) Math.floor(healthRate * 10);
+
+            StringBuilder redBarBuilder = new StringBuilder();
+
+            for (int i = 0; i < barAmount; i++) {
+                redBarBuilder.append(" ");
+            }
+
+            StringBuilder spaceBarBuilder = new StringBuilder();
+
+            for (int i = 0; i < 10 - barAmount; i++) {
+                spaceBarBuilder.append(" ");
+            }
+
+            entity.setCustomName(ChatUtil.setColorCodes("&c&m" + redBarBuilder.toString() + "&8&m" + spaceBarBuilder.toString()));
+            entity.setCustomNameVisible(true);
         }
-
-        StringBuilder spaceBarBuilder = new StringBuilder();
-
-        for (int i = 0; i < 10 - barAmount; i++) {
-            spaceBarBuilder.append(" ");
-        }
-
-        entity.setCustomName(ChatUtil.setColorCodes("&c&m" + redBarBuilder.toString() + "&8&m" + spaceBarBuilder.toString()));
-        entity.setCustomNameVisible(true);
     }
 
     /**

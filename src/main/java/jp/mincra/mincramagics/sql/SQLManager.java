@@ -14,7 +14,6 @@ public class SQLManager {
             MincraMagics.getPropertyManager().getProperty("MySQL_password");
 
     private MincraPlayerSQL mincraPlayerSQL;
-    private EntitySQL entitySQL;
 
 
     public Connection getConnection(){
@@ -120,14 +119,6 @@ public class SQLManager {
         }
         return mincraPlayerSQL;
     }
-
-    public EntitySQL getEntitySQL() {
-        if (entitySQL == null) {
-            entitySQL = new EntitySQL();
-        }
-        return entitySQL;
-    }
-
 
     public void truncateTable(String tableName) {
         StringBuilder query = new StringBuilder("TRUNCATE TABLE ");

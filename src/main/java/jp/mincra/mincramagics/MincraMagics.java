@@ -18,6 +18,7 @@ import jp.mincra.mincramagics.skill.rod.*;
 import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.ui.UIManager;
 import jp.mincra.mincramagics.util.ChatUtil;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -69,20 +70,21 @@ public final class MincraMagics extends JavaPlugin {
         }.runTaskLater(this, 60);
 
         //listener
-        getServer().getPluginManager().registerEvents(new onPlayerJoin(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerQuit(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerChat(), this);
-        getServer().getPluginManager().registerEvents(new onPrepareItemCraft(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerToggleFlight(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerInteract(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerInteractEntity(), this);
-        getServer().getPluginManager().registerEvents(new onEntitySpawn(), this);
-        getServer().getPluginManager().registerEvents(new onEntityDeath(), this);
-        getServer().getPluginManager().registerEvents(new onInventory(), this);
-        getServer().getPluginManager().registerEvents(new onEntityTargetLivingEntity(), this);
-        getServer().getPluginManager().registerEvents(new onEntityDamage(), this);
-        getServer().getPluginManager().registerEvents(new onEntityDamageByEntity(), this);
-        getServer().getPluginManager().registerEvents(new onPlayerDeath(), this);
+        PluginManager manager = getServer().getPluginManager();
+        manager.registerEvents(new onPlayerJoin(), this);
+        manager.registerEvents(new onPlayerQuit(), this);
+        manager.registerEvents(new onPlayerChat(), this);
+        manager.registerEvents(new onPrepareItemCraft(), this);
+        manager.registerEvents(new onPlayerToggleFlight(), this);
+        manager.registerEvents(new onPlayerInteract(), this);
+        manager.registerEvents(new onPlayerInteractEntity(), this);
+        manager.registerEvents(new onEntitySpawn(), this);
+        manager.registerEvents(new onEntityDeath(), this);
+        manager.registerEvents(new onInventory(), this);
+        manager.registerEvents(new onEntityTargetLivingEntity(), this);
+        manager.registerEvents(new onEntityDamage(), this);
+        manager.registerEvents(new onEntityDamageByEntity(), this);
+        manager.registerEvents(new onPlayerDeath(), this);
         //独自リスナー
         getEventNotifier();
         //Skills

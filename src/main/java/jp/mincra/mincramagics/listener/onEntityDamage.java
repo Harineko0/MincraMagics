@@ -67,7 +67,7 @@ public class onEntityDamage implements Listener {
 
             //体力バー
             if (MobUtil.existEntityNear(entity, EntityType.PLAYER, 30, 30, 30)) {
-                MobUtil.setHealthBar((LivingEntity) entity);
+                MobUtil.setHealthBar(entity);
 
                 new BukkitRunnable() {
                     @Override

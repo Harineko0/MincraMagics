@@ -1,6 +1,5 @@
 package jp.mincra.mincramagics.entity.mob;
 
-import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTContainer;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
 import de.tr7zw.changeme.nbtapi.NBTList;
@@ -9,8 +8,12 @@ import jp.mincra.mincramagics.sql.SQLManager;
 import jp.mincra.mincramagics.util.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftCreature;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.EventHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
