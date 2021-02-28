@@ -45,6 +45,8 @@ public class EventNotifier {
                 Set<EventMethod> eventMethodSet = new HashSet<>();
                 eventMap.put(eventClass, eventMethodSet);
             }
+            System.out.println(eventClass);
+            System.out.println(eventMethod);
             eventMap.get(eventClass).add(eventMethod);
 
         }
@@ -52,7 +54,9 @@ public class EventNotifier {
     }
 
     public void fireEvent(Event event) {
-        Set<EventMethod> eventMethodSet = eventMap.get(event.getClass());
+        System.out.println(event);
+        System.out.println(eventMap.containsKey(event));
+        Set<EventMethod> eventMethodSet = eventMap.get(event);
 
         for (EventMethod eventMethod : eventMethodSet) {
             try {
