@@ -1,16 +1,30 @@
 package jp.mincra.mincramagics.event.player;
 
-import jp.mincra.mincramagics.event.MincraListener;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerEvent;
 
-import java.util.EventListener;
+public abstract class PlayerUseMagicRodEvent extends PlayerEvent {
 
-public interface PlayerUseMagicRodEvent extends EventListener, MincraListener {
+    private Entity target;
+    private String mcrID;
 
-    /**
-     * プレイヤーが魔法杖を使ったときに実行
-     * @param player プレイヤー
-     * @param mcr_id 魔法杖のID
-     */
-    void onPlayerUseMagicRod(Player player, String mcr_id);
+    public PlayerUseMagicRodEvent(Player player, String mcrID) {
+        super(player);
+        this.mcrID = mcrID;
+    }
+
+    public PlayerUseMagicRodEvent(Player player, Entity target, String mcrID) {
+        super(player);
+        this.target = target;
+        this.mcrID = mcrID;
+    }
+
+    public Entity getTarget() {
+        return target;
+    }
+
+    public String getMcrID() {
+        return mcrID;
+    }
 }

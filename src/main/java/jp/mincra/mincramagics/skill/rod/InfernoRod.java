@@ -10,6 +10,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -17,18 +19,20 @@ import java.util.List;
 import java.util.Random;
 
 
-public class InfernoRod implements PlayerUseMagicRodEvent {
+public class InfernoRod implements Listener {
 
     Player player;
     int level;
 
-    @Override
-    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+    @EventHandler
+    public void onPlayerUseMagicRod(PlayerUseMagicRodEvent event) {
+
+        String mcr_id = event.getMcrID();
 
         if (mcr_id.contains("rod_inferno")) {
 
                 //メイン
-                this.player = player;
+                this.player = event.getPlayer();
                 level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 
                 BukkitTask[] task = new BukkitTask[level * 7];

@@ -173,7 +173,7 @@ public class MincraCommands implements CommandExecutor {
 
                 MincraMagics.getMobManager().setEntityNBT(entity, args[1]);
 
-                MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, args[1]);
+//                MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, args[1]);
 
                 caster.sendMessage(ChatUtil.debug(args[1] + "を召喚しました。"));
 

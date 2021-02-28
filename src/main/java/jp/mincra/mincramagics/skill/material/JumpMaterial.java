@@ -6,12 +6,17 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.util.Vector;
 
-public class JumpMaterial implements PlayerUseMaterialEvent {
+public class JumpMaterial implements Listener {
 
-    @Override
-    public void onPlayerUseMaterial(Player player, String mcr_id) {
+    @EventHandler
+    public void onPlayerUseMaterial(PlayerUseMaterialEvent event) {
+
+        Player player = event.getPlayer();
+        String mcr_id = event.getMcrID();
 
         if (mcr_id.contains("jump")) {
 

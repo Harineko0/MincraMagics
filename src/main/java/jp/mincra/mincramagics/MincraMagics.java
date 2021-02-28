@@ -4,7 +4,6 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import jp.mincra.mincramagics.command.*;
 import jp.mincra.mincramagics.entity.mob.MobManager;
-import jp.mincra.mincramagics.entity.mob.hostile.ExampleZombieMob;
 import jp.mincra.mincramagics.entity.player.PlayerManager;
 import jp.mincra.mincramagics.event.EventNotifier;
 import jp.mincra.mincramagics.item.ItemManager;
@@ -102,7 +101,7 @@ public final class MincraMagics extends JavaPlugin {
         eventNotifier.registerEvents(new MoveMaterial());
         eventNotifier.registerEvents(new JumpMaterial());
         //Mobs
-        eventNotifier.registerEvents(new ExampleZombieMob());
+//        eventNotifier.registerEvents(new ExampleZombieMob());
 
         //command
         getCommand("mcr").setExecutor(new MincraCommands(this));

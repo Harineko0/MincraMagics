@@ -2,14 +2,17 @@ package jp.mincra.mincramagics.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class onPlayerInteractEntity implements Listener {
 
@@ -35,8 +38,13 @@ public class onPlayerInteractEntity implements Listener {
                             MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                             //魔法杖イベント実行
-                            MincraMagics.getEventNotifier().runPlayerUseMagicRodToEntity(player, e.getRightClicked(), nbtItem.getCompound("MincraMagics").getString("id"));
-                        }
+                            PlayerUseMagicRodEvent event = new PlayerUseMagicRodEvent(player, e.getRightClicked(), nbtItem.getCompound("MincraMagics").getString("id")) {
+                                @Override
+                                public @NotNull HandlerList getHandlers() {
+                                    return null;
+                                }
+                            };
+                            MincraMagics.getEventNotifier().fireEvent(event);                        }
                     }
                 }
             }

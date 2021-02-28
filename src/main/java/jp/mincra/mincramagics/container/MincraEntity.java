@@ -5,14 +5,19 @@ import java.util.UUID;
 public class MincraEntity {
 
     private UUID uuid;
-    private String mcr_id;
+    private String mcrID;
 
-    public String getMcr_id() {
-        return mcr_id;
+    public MincraEntity(UUID uuid, String mcrID) {
+        this.uuid = uuid;
+        this.mcrID = mcrID;
     }
 
-    public void setMcr_id(String mcr_id) {
-        this.mcr_id = mcr_id;
+    public String getMcrID() {
+        return mcrID;
+    }
+
+    public void setMcrID(String mcrID) {
+        this.mcrID = mcrID;
     }
 
     public UUID getUuid() {

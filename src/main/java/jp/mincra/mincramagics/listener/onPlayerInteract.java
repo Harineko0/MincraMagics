@@ -2,14 +2,18 @@ package jp.mincra.mincramagics.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import jp.mincra.mincramagics.MincraMagics;
+import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
+import jp.mincra.mincramagics.event.player.PlayerUseMaterialEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -42,7 +46,13 @@ public class onPlayerInteract implements Listener {
                                 MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
                                 //魔法杖イベント実行
-                                MincraMagics.getEventNotifier().runPlayerUseMagicRod(player, nbtItem.getCompound("MincraMagics").getString("id"));
+                                PlayerUseMagicRodEvent event = new PlayerUseMagicRodEvent(player, mcr_id) {
+                                    @Override
+                                    public @NotNull HandlerList getHandlers() {
+                                        return null;
+                                    }
+                                };
+                                MincraMagics.getEventNotifier().fireEvent(event);
 
                             }
                         }
@@ -74,7 +84,13 @@ public class onPlayerInteract implements Listener {
 
                                 MincraMagics.getSkillManager().useSkill(player, mcr_id);
 
-                                MincraMagics.getEventNotifier().runPlayerUseMaterial(player, mcr_id);
+                                PlayerUseMaterialEvent event = new PlayerUseMaterialEvent(player, mcr_id) {
+                                    @Override
+                                    public @NotNull HandlerList getHandlers() {
+                                        return null;
+                                    }
+                                };
+                                MincraMagics.getEventNotifier().fireEvent(event);
 
                             }
                         }

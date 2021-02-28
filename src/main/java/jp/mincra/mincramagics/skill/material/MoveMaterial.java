@@ -1,19 +1,23 @@
 package jp.mincra.mincramagics.skill.material;
 
-import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.event.player.PlayerUseMaterialEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class MoveMaterial implements PlayerUseMaterialEvent {
+public class MoveMaterial implements Listener {
 
-    @Override
-    public void onPlayerUseMaterial(Player player, String mcr_id) {
+    @EventHandler
+    public void onPlayerUseMaterial(PlayerUseMaterialEvent event) {
+
+        Player player = event.getPlayer();
+        String mcr_id = event.getMcrID();
 
         if (mcr_id.contains("move")) {
 

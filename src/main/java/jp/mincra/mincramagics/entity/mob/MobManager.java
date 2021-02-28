@@ -212,7 +212,7 @@ public class MobManager extends SQLManager {
                 for (String tag : tagsList) {
 
                     if (tag != null && tag.contains("id")) {
-                        MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, new JSONObject(tag).getString("id"));
+//                        MincraMagics.getEventNotifier().runCustomEntitySpawn(entity, new JSONObject(tag).getString("id"));
 
                     }
                 }

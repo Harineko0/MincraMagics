@@ -8,14 +8,22 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+import sun.jvm.hotspot.ui.ObjectHistogramPanel;
 
-public class ExpRod implements PlayerUseMagicRodEvent {
+public class ExpRod implements Listener {
 
-    @Override
-    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+    @EventHandler
+    public void onPlayerUseMagicRod(PlayerUseMagicRodEvent event) {
+
+        String mcr_id = event.getMcrID();
+
         if (mcr_id.contains("rod_exp")) {
+
+            Player player = event.getPlayer();
 
             switch (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1))) {
                 case 1:

@@ -1,11 +1,18 @@
 package jp.mincra.mincramagics.event.player;
 
-import jp.mincra.mincramagics.event.MincraListener;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerEvent;
 
-import java.util.EventListener;
+public abstract class PlayerUseMaterialEvent extends PlayerEvent {
 
-public interface PlayerUseMaterialEvent extends EventListener, MincraListener {
+    private String mcrID;
 
-    void onPlayerUseMaterial(Player player, String mcr_id);
+    public PlayerUseMaterialEvent(Player player, String mcrID) {
+        super(player);
+        this.mcrID = mcrID;
+    }
+
+    public String getMcrID() {
+        return mcrID;
+    }
 }

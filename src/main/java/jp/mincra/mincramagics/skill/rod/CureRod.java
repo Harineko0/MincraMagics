@@ -10,18 +10,24 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class CureRod implements PlayerUseMagicRodEvent {
+public class CureRod implements Listener {
 
-    @Override
-    public void onPlayerUseMagicRod(Player player, String mcr_id) {
+    @EventHandler
+    public void onPlayerUseMagicRod(PlayerUseMagicRodEvent event) {
+
+        String mcr_id = event.getMcrID();
 
         if (mcr_id.contains("rod_cure")) {
+
+            Player player = event.getPlayer();
 
             int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
 

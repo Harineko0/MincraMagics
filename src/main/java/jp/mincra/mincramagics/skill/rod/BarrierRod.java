@@ -1,68 +1,52 @@
 package jp.mincra.mincramagics.skill.rod;
 
-import jp.mincra.mincramagics.MincraMagics;
 import jp.mincra.mincramagics.event.player.PlayerUseMagicRodEvent;
-import jp.mincra.mincramagics.event.player.PlayerUseMagicRodToEntityEvent;
 import jp.mincra.mincramagics.util.MincraParticle;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 
-public class BarrierRod implements PlayerUseMagicRodEvent,PlayerUseMagicRodToEntityEvent {
+public class BarrierRod implements Listener {
 
-    @Override
-    public void onPlayerUseMagicRodToEntity(Player player, Entity entity, String mcr_id) {
+    @EventHandler
+    public void onPlayerUseMagicRod(PlayerUseMagicRodEvent event) {
+        String mcr_id = event.getMcrID();
+
         if (mcr_id.contains("rod_barrier")) {
 
             int level = Integer.parseInt(mcr_id.substring(mcr_id.length() - 1));
+            Player target = (Player) event.getTarget();
+            Player caster = event.getPlayer();
 
             if (level == 1 || level == 2) {
-                 //メイン
-                Player target = (Player) entity;
                 target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, level * 20 * 60, level-1));
-
-                //装飾
                 decoration(target.getLocation());
 
-            }
-        }
-    }
+            } else {
 
+                List<Entity> entityList = caster.getNearbyEntities(9, 5, 9);
+                entityList.add(caster);
 
-    @Override
-    public void onPlayerUseMagicRod(Player caster, String mcr_id) {
-        if (mcr_id.contains("rod_barrier")) {
+                for (Entity entity : entityList) {
 
-            if (Integer.parseInt(mcr_id.substring(mcr_id.length() - 1)) == 3) {
+                    if (entity instanceof Player) {
+                        ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 180, 2));
 
-                if (MincraMagics.getSkillManager().canUseSkill(caster, mcr_id)) {
-
-                    MincraMagics.getSkillManager().useSkill(caster, mcr_id);
-
-                    List<Entity> entityList = caster.getNearbyEntities(9, 5, 9);
-                    entityList.add(caster);
-
-                    for (Entity entity : entityList) {
-                        //メイン
-                        if (entity instanceof Player) {
-                            Player target = (Player) entity;
-                            target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 180, 2));
-
-                            //装飾
-                            decoration(target.getLocation());
-                        }
+                        //装飾
+                        decoration(entity.getLocation());
                     }
-
-                    //装飾
-                    decoration(caster.getLocation());
                 }
             }
+
+            decoration(caster.getLocation());
         }
     }
 
